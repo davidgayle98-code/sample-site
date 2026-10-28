@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ironside Strength Co. | Gym in Fishtown, Philadelphia</title>
+<meta name="description" content="Ironside Strength Co. is a neighborhood strength gym in Fishtown, Philadelphia. Personal training, group classes, and open gym. First class free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #121212;
+    --paper: #f4f2ee;
+    --steel: #2a2d31;
+    --muted: #6b6f75;
+    --orange: #ff5a1f;
+    --line: #dedad3;
+    --display: "Anton", Impact, "Arial Narrow", sans-serif;
+    --body: "Inter", system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font: 400 17px/1.6 var(--body); color: var(--ink); background: var(--paper); }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .01em; line-height: 1; margin: 0; }
+  h2 { font-size: clamp(36px, 6vw, 56px); }
+  h3 { font-size: 26px; }
+  p { margin: 0; }
+  .eyebrow { font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); }
+  .btn { display: inline-block; font-weight: 700; text-decoration: none; padding: 14px 26px; border-radius: 4px; border: 2px solid var(--orange); background: var(--orange); color: #fff; transition: transform .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+  section { padding: 88px 0; }
+
+  /* Nav */
+  .demo { background: var(--orange); color: #fff; text-align: center; font-size: 13px; padding: 6px 12px; }
+  nav { position: sticky; top: 0; z-index: 10; background: var(--ink); color: #fff; }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+  .logo { font-family: var(--display); font-size: 24px; text-decoration: none; letter-spacing: .03em; }
+  .logo span { color: var(--orange); }
+  nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; font-size: 15px; }
+  nav ul a { text-decoration: none; opacity: .85; }
+  nav ul a:hover { opacity: 1; color: var(--orange); }
+  @media (max-width: 760px) { nav ul { display: none; } }
+
+  /* Hero */
+  .hero { background: var(--ink); color: #fff; padding: 96px 0 104px; position: relative; overflow: hidden; }
+  .hero::after { content: ""; position: absolute; right: -120px; top: -60px; width: 520px; height: 520px; border: 60px solid var(--orange); border-radius: 50%; opacity: .9; }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(56px, 11vw, 128px); max-width: 10ch; }
+  .hero h1 em { font-style: normal; color: var(--orange); }
+  .hero p { max-width: 46ch; font-size: 19px; color: #c9cbce; margin: 24px 0 36px; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 64px; padding-top: 28px; border-top: 1px solid #333; }
+  .stats b { display: block; font-family: var(--display); font-size: 40px; font-weight: 400; color: #fff; }
+  .stats span { font-size: 14px; color: #9a9da2; }
+  @media (max-width: 760px) { .hero::after { width: 300px; height: 300px; border-width: 36px; right: -140px; top: -40px; } }
+
+  /* Programs */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 44px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+  .card .tag { font-size: 13px; color: var(--muted); }
+  .card p { color: #3d4045; font-size: 16px; }
+  .icon { width: 44px; height: 44px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; }
+  .icon svg { width: 22px; height: 22px; stroke: var(--orange); fill: none; stroke-width: 2.2; }
+
+  /* Schedule */
+  .dark { background: var(--steel); color: #fff; }
+  .schedule { overflow-x: auto; margin-top: 40px; }
+  table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 14px 12px; border-bottom: 1px solid #44484e; }
+  th { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #9a9da2; font-weight: 700; }
+  td.time { font-weight: 700; color: var(--orange); white-space: nowrap; }
+
+  /* Pricing */
+  .price { font-family: var(--display); font-size: 56px; line-height: 1; }
+  .price small { font-family: var(--body); font-size: 16px; color: var(--muted); }
+  .card ul { margin: 6px 0 12px; padding-left: 18px; color: #3d4045; font-size: 15px; display: grid; gap: 6px; }
+  .card.featured { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .card.featured p, .card.featured ul { color: #c9cbce; }
+  .card.featured .price small { color: #9a9da2; }
+  .card .btn { margin-top: auto; text-align: center; }
+  .card:not(.featured) .btn { background: transparent; color: var(--ink); border-color: var(--ink); }
+
+  /* Coaches */
+  .coach .avatar { aspect-ratio: 1; border-radius: 6px; display: grid; place-items: center; font-family: var(--display); font-size: 64px; color: #fff; }
+
+  /* Quotes */
+  blockquote { margin: 0; font-size: 18px; }
+  blockquote cite { display: block; margin-top: 14px; font-style: normal; font-size: 14px; color: var(--muted); }
+
+  /* Contact */
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  @media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
+  .info { display: grid; gap: 20px; margin-top: 28px; }
+  .info b { display: block; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  form { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 28px; display: grid; gap: 14px; }
+  label { font-size: 14px; font-weight: 500; display: grid; gap: 6px; }
+  input, select { font: inherit; padding: 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--paper); }
+  input:focus, select:focus { outline: 2px solid var(--orange); border-color: transparent; }
+  form .btn { border: none; cursor: pointer; font: inherit; font-weight: 700; }
+  .thanks { display: none; font-weight: 500; color: var(--orange); }
+
+  footer { background: var(--ink); color: #9a9da2; font-size: 14px; padding: 36px 0; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+</style>
+</head>
+<body>
+
+<div class="demo">Demo website. Ironside Strength Co. is a fictional gym created as a portfolio sample.</div>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#">IRONSIDE<span>.</span></a>
+    <ul>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#coaches">Coaches</a></li>
+      <li><a href="#contact">Visit</a></li>
+    </ul>
+    <a class="btn" href="#contact" style="padding:9px 18px;font-size:14px">Free class</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Fishtown, Philadelphia</span>
+    <h1>Get <em>strong.</em> Stay strong.</h1>
+    <p>A neighborhood strength gym with real coaches, small classes, and no mirrors-and-selfies attitude. Beginners welcome. Your first class is on us.</p>
+    <div class="ctas">
+      <a class="btn" href="#contact">Book a free class</a>
+      <a class="btn ghost" href="#schedule">See the schedule</a>
+    </div>
+    <div class="stats">
+      <div><b>12</b><span>max per class</span></div>
+      <div><b>5AM</b><span>earliest class</span></div>
+      <div><b>6</b><span>certified coaches</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="programs">
+  <div class="wrap">
+    <span class="eyebrow">Programs</span>
+    <h2>Find your fit</h2>
+    <div class="grid">
+      <article class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/></svg></div>
+        <h3>Strength Class</h3>
+        <span class="tag">60 min · All levels</span>
+        <p>Squat, press, deadlift, and pull, coached in small groups. Every workout scales to where you are today.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <h3>Conditioning</h3>
+        <span class="tag">45 min · All levels</span>
+        <p>Intervals on bikes, rowers, sleds, and kettlebells. Hard work, good music, done in under an hour.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg></div>
+        <h3>Personal Training</h3>
+        <span class="tag">1-on-1 · By appointment</span>
+        <p>A plan built for your goals, whether that's your first pull-up, losing weight, or coming back from an injury.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+        <h3>Open Gym</h3>
+        <span class="tag">Members · 5AM–10PM</span>
+        <p>Racks, platforms, and dumbbells to 120 lb. Train on your own schedule when classes don't fit.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="schedule" class="dark">
+  <div class="wrap">
+    <span class="eyebrow">Weekly schedule</span>
+    <h2>Classes that fit your day</h2>
+    <div class="schedule">
+      <table>
+        <thead><tr><th>Time</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>
+        <tbody>
+          <tr><td class="time">5:00 AM</td><td>Strength</td><td>Conditioning</td><td>Strength</td><td>Conditioning</td><td>Strength</td><td>—</td></tr>
+          <tr><td class="time">6:15 AM</td><td>Conditioning</td><td>Strength</td><td>Conditioning</td><td>Strength</td><td>Conditioning</td><td>—</td></tr>
+          <tr><td class="time">9:00 AM</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Strength</td></tr>
+          <tr><td class="time">10:15 AM</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Conditioning</td></tr>
+          <tr><td class="time">12:00 PM</td><td>Strength</td><td>—</td><td>Strength</td><td>—</td><td>Strength</td><td>—</td></tr>
+          <tr><td class="time">5:30 PM</td><td>Strength</td><td>Conditioning</td><td>Strength</td><td>Conditioning</td><td>Strength</td><td>—</td></tr>
+          <tr><td class="time">6:45 PM</td><td>Conditioning</td><td>Strength</td><td>Conditioning</td><td>Strength</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <span class="eyebrow">Membership</span>
+    <h2>Simple pricing</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Open Gym</h3>
+        <div class="price">$59<small> /month</small></div>
+        <ul><li>Open gym 5AM–10PM</li><li>Free intro session</li><li>No contract</li></ul>
+        <a class="btn" href="#contact">Get started</a>
+      </article>
+      <article class="card featured">
+        <span class="eyebrow">Most popular</span>
+        <h3>Unlimited Classes</h3>
+        <div class="price">$139<small> /month</small></div>
+        <ul><li>Every class on the schedule</li><li>Open gym included</li><li>Quarterly progress check-in</li></ul>
+        <a class="btn" href="#contact">Get started</a>
+      </article>
+      <article class="card">
+        <h3>Personal Training</h3>
+        <div class="price">$65<small> /session</small></div>
+        <ul><li>1-on-1 with a coach</li><li>Custom program</li><li>Packs of 10 for $590</li></ul>
+        <a class="btn" href="#contact">Book a consult</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="coaches" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow">Coaches</span>
+    <h2>Meet the team</h2>
+    <div class="grid">
+      <article class="card coach"><div class="avatar" style="background:#2a2d31">MR</div><h3>Maya R.</h3><span class="tag">Head Coach · NASM-CPT</span><p>Ten years coaching. Loves helping first-timers get under a barbell.</p></article>
+      <article class="card coach"><div class="avatar" style="background:#ff5a1f">JT</div><h3>Jordan T.</h3><span class="tag">Conditioning · ACE-CPT</span><p>Former college sprinter. Runs the 5AM crew.</p></article>
+      <article class="card coach"><div class="avatar" style="background:#121212">AK</div><h3>Andre K.</h3><span class="tag">Personal Training · CSCS</span><p>Specializes in strength for people over 40 and injury comebacks.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <span class="eyebrow">Members say</span>
+    <h2>Sample reviews</h2>
+    <div class="grid">
+      <article class="card" style="background:transparent;border-color:#44484e"><blockquote>"I'd never touched a barbell. Six months later I deadlifted my bodyweight."<cite>Sample review placeholder</cite></blockquote></article>
+      <article class="card" style="background:transparent;border-color:#44484e"><blockquote>"The 5AM class is the best part of my day. The coaches know everyone's name."<cite>Sample review placeholder</cite></blockquote></article>
+      <article class="card" style="background:transparent;border-color:#44484e"><blockquote>"Small classes mean you actually get coached, not just yelled at."<cite>Sample review placeholder</cite></blockquote></article>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact">
+    <div>
+      <span class="eyebrow">Visit us</span>
+      <h2>Your first class is free</h2>
+      <div class="info">
+        <div><b>Address</b>123 Example Ave, Philadelphia, PA (sample)</div>
+        <div><b>Hours</b>Mon–Fri 5AM–10PM · Sat–Sun 8AM–6PM</div>
+        <div><b>Phone</b>(215) 555-0142</div>
+        <div><b>Parking</b>Free street parking after 6PM</div>
+      </div>
+    </div>
+    <form id="trial">
+      <h3>Book a free class</h3>
+      <label>Name<input id="name" required></label>
+      <label>Email<input id="email" type="email" required></label>
+      <label>Which class?<select id="class"><option>Strength</option><option>Conditioning</option><option>Personal training consult</option></select></label>
+      <button class="btn" type="submit">Reserve my spot</button>
+      <p class="thanks" id="thanks">Thanks! This is a demo, so no message was sent.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ironside Strength Co. (fictional)</span>
+    <span>Website by David Gayle</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('trial').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('thanks').style.display = 'block';
+  });
+</script>
+</body>
+</html>
