@@ -196,6 +196,7 @@
   .dojo > div { padding: 16px 18px 18px; }
   .dojo h3 { font-size: 22px; margin-bottom: 2px; }
   .dojo .loc { color: var(--red); font-weight: 700; font-size: 15px; }
+  .dojo a.go { display: inline-block; margin-top: 10px; font-weight: 700; font-size: 14px; text-decoration: none; border-bottom: 2px solid var(--gold); }
   .dojo.local { outline: 3px solid var(--gold); }
   .dojo.hide { display: none; }
 
@@ -572,7 +573,8 @@
           <h4>Deadlines</h4>
           <p>Spring semester: <strong>December 1</strong><br>Fall semester: <strong>August 1</strong></p>
           <h4>Funded by</h4>
-          <p style="margin:0">The OIMA Scholarship Fund, through donations and our annual fundraising events.</p>
+          <p>The OIMA Scholarship Fund, through donations and our annual fundraising events.</p>
+          <a class="btn" href="https://oimartialarts.com/memorial-scholarship-info/" target="_blank" rel="noopener">Application &amp; writing help</a>
         </div>
       </div>
       <div class="panel" id="s2" role="tabpanel" aria-labelledby="t2">
@@ -587,7 +589,8 @@
         </div>
         <div class="side">
           <h4>How to apply</h4>
-          <p style="margin:0">1. Complete the application<br>2. Add a cover page saying what you're applying for<br>3. Write an essay (writing prompts help)<br>4. Get two letters of recommendation<br>5. Give it all to your sensei</p>
+          <p>1. Complete the application<br>2. Add a cover page saying what you're applying for<br>3. Write an essay (writing prompts help)<br>4. Get two letters of recommendation<br>5. Give it all to your sensei</p>
+          <a class="btn" href="https://oimartialarts.com/oima-scholarship/" target="_blank" rel="noopener">Application &amp; writing help</a>
         </div>
       </div>
       <div class="donate">
@@ -804,9 +807,9 @@
 
   // Dojos
   var dojos = [
-    ['Tres Artes Dojo', 'Harrisburg, PA', 'PA', 'dojo-tres-artes', 'Weapons training in the Harrisburg dojo.'],
+    ['Tres Artes Dojo', 'Harrisburg, PA', 'PA', 'dojo-tres-artes', 'Weapons training in the Harrisburg dojo.', 'https://oimartialarts.com/harrisburg-dojo/'],
     ['Jayco Dojo', 'Elkton, MD', 'MD', 'dojo-jayco', 'Grandmaster Cooling\'s home area in Cecil County.'],
-    ['Elkton YMCA Dojo', 'Elkton, MD', 'MD', 'dojo-elkton-ymca', 'Classes for kids and adults at the YMCA.'],
+    ['Elkton YMCA Dojo', 'Elkton, MD', 'MD', 'dojo-elkton-ymca', 'Classes for kids and adults at the YMCA.', 'https://oimartialarts.com/elkton-ymca-dojo/'],
     ['Atlanta Dojo', 'Atlanta, GA', 'GA', 'dojo-atlanta', 'The Order in the Southeast.'],
     ['Isham Martial Arts Academy', 'Huntington Beach, NY', 'NY', 'dojo-isham', 'A full class of young students and their black belts.'],
     ['OIMA Virtual Dojo', 'Online with Sensei Ginn', 'online', 'dojo-virtual', 'Train with the Order from anywhere.']
@@ -814,7 +817,8 @@
   var dl = document.getElementById('dojo-list');
   dl.innerHTML = dojos.map(function (d) {
     return '<article class="dojo' + (d[2] === 'PA' ? ' local' : '') + '" data-st="' + d[2] + '"><img src="img/' + d[3] + '.jpg" alt="' + d[0] + '" loading="lazy"><div>' +
-      '<h3>' + d[0] + '</h3><div class="loc">' + d[1] + '</div><p class="small" style="margin:8px 0 0">' + d[4] + '</p></div></article>';
+      '<h3>' + d[0] + '</h3><div class="loc">' + d[1] + '</div><p class="small" style="margin:8px 0 0">' + d[4] + '</p>' +
+      (d[5] ? '<a class="go" href="' + d[5] + '" target="_blank" rel="noopener">Contact this dojo</a>' : '') + '</div></article>';
   }).join('');
   chips('d-filters', function (f) {
     dl.querySelectorAll('.dojo').forEach(function (el) { el.classList.toggle('hide', f !== 'all' && el.dataset.st !== f); });
