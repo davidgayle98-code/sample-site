@@ -8,101 +8,109 @@
 <meta name="description" content="Homemade cakes, pies, cupcakes, and cheesecake in Midtown Harrisburg. Custom cakes for birthdays, holidays, and every celebration.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --plum: #3b1f2b;
-    --berry: #b8325a;
-    --butter: #fbe7a1;
-    --cream: #fffaf2;
-    --blush: #f8dfe3;
-    --muted: #7a6168;
-    --display: "Gloock", Georgia, serif;
-    --body: "Nunito Sans", system-ui, -apple-system, sans-serif;
+    --ink: #161616;
+    --soft: #6e6e6e;
+    --line: #ececec;
+    --bg: #ffffff;
+    --tint: #f7f6f4;
+    --accent: #c2410c;
+    --font: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; font: 400 17px/1.65 var(--body); color: var(--plum); background: var(--cream); }
+  body { margin: 0; font: 400 16px/1.65 var(--font); color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
-  h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.1; margin: 0; }
-  h2 { font-size: clamp(34px, 5vw, 48px); }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
   p { margin: 0; }
-  .kicker { font-weight: 800; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--berry); }
-  .btn { display: inline-block; text-decoration: none; font-weight: 800; padding: 14px 26px; border-radius: 999px; background: var(--berry); color: #fff; border: 2px solid var(--berry); transition: transform .15s; }
-  .btn:hover { transform: translateY(-2px); }
-  .btn.alt { background: transparent; color: var(--plum); border-color: var(--plum); }
-  section { padding: 84px 0; }
+  .label { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--soft); }
+  .btn { display: inline-block; text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 24px; border-radius: 999px; background: var(--ink); color: #fff; border: 1px solid var(--ink); transition: opacity .15s; }
+  .btn:hover { opacity: .85; }
+  .btn.line { background: transparent; color: var(--ink); }
+  section { padding: 104px 0; }
 
-  .concept { background: var(--plum); color: var(--butter); text-align: center; font-size: 13px; padding: 7px 12px; }
+  .concept { background: var(--tint); color: var(--soft); text-align: center; font-size: 12px; padding: 8px 12px; }
 
+  nav { border-bottom: 1px solid var(--line); }
   nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 72px; gap: 16px; }
-  .logo { font-family: var(--display); font-size: 26px; text-decoration: none; }
-  .logo span { color: var(--berry); }
-  nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; font-weight: 600; font-size: 15px; }
-  nav ul a { text-decoration: none; }
-  nav ul a:hover { color: var(--berry); }
+  .logo { font-weight: 800; font-size: 18px; letter-spacing: -0.02em; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 32px; margin: 0; padding: 0; font-size: 14px; font-weight: 500; }
+  nav ul a { text-decoration: none; color: var(--soft); }
+  nav ul a:hover { color: var(--ink); }
   @media (max-width: 720px) { nav ul { display: none; } }
 
-  .hero { padding: 56px 0 88px; }
-  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
-  @media (max-width: 820px) { .hero .wrap { grid-template-columns: 1fr; } }
-  .hero h1 { font-size: clamp(48px, 8vw, 84px); margin: 14px 0 20px; }
-  .hero h1 em { font-style: normal; color: var(--berry); }
-  .hero p { font-size: 19px; color: var(--muted); max-width: 44ch; margin-bottom: 30px; }
-  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-  .badge { margin-top: 28px; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
-  .stars { color: var(--berry); letter-spacing: 2px; }
+  .hero { padding: 88px 0 72px; }
+  .hero h1 { font-size: clamp(44px, 7.5vw, 88px); max-width: 13ch; margin: 18px 0 24px; }
+  .hero p { font-size: 18px; color: var(--soft); max-width: 46ch; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .rating { display: flex; align-items: center; gap: 10px; margin-top: 28px; font-size: 14px; color: var(--soft); }
+  .rating b { color: var(--ink); }
 
-  /* Illustrated pie */
-  .art { aspect-ratio: 1; max-width: 440px; width: 100%; justify-self: center; border-radius: 50%; background: var(--butter); display: grid; place-items: center; }
-  .art svg { width: 78%; height: auto; }
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 32px; }
+  .gallery figure { margin: 0; }
+  .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; background: var(--tint); }
+  .gallery figcaption { margin-top: 12px; font-size: 14px; font-weight: 600; }
+  .gallery figcaption span { display: block; font-weight: 400; color: var(--soft); }
+  @media (max-width: 720px) { .gallery { grid-template-columns: 1fr 1fr; } .gallery figure:last-child { grid-column: span 2; } }
 
-  .menu { background: var(--blush); }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-top: 40px; }
-  .item { background: var(--cream); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 8px; }
-  .item h3 { font-size: 24px; }
-  .item p { color: var(--muted); font-size: 15px; }
-  .item .tag { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--berry); }
-  .note { margin-top: 24px; color: var(--muted); font-size: 15px; }
+  .menu { background: var(--tint); }
+  .menu-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 48px; }
+  .menu-head h2, .custom h2, .visit h2 { font-size: clamp(32px, 5vw, 52px); }
+  .menu-head p { color: var(--soft); max-width: 36ch; }
+  .list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; }
+  @media (max-width: 720px) { .list { grid-template-columns: 1fr; } }
+  .row { display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; border-top: 1px solid #e2e0dc; }
+  .row h3 { font-size: 18px; letter-spacing: -0.01em; }
+  .row p { color: var(--soft); font-size: 14px; margin-top: 4px; }
+  .row .kind { font-size: 12px; font-weight: 600; color: var(--soft); white-space: nowrap; padding-top: 4px; }
 
-  .custom .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-  @media (max-width: 820px) { .custom .wrap { grid-template-columns: 1fr; } }
-  .steps { display: grid; gap: 18px; margin-top: 28px; }
-  .step { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
-  .step b { width: 44px; height: 44px; border-radius: 50%; background: var(--butter); display: grid; place-items: center; font-family: var(--display); font-size: 20px; font-weight: 400; }
-  .step p { color: var(--muted); font-size: 15px; }
-  .step strong { display: block; color: var(--plum); font-size: 17px; }
-  form { background: #fff; border-radius: 20px; padding: 28px; display: grid; gap: 14px; box-shadow: 0 10px 40px rgba(59,31,43,.08); }
-  label { font-size: 14px; font-weight: 600; display: grid; gap: 6px; }
-  input, select, textarea { font: inherit; padding: 12px; border: 1px solid #ead7da; border-radius: 10px; background: var(--cream); }
-  input:focus, select:focus, textarea:focus { outline: 2px solid var(--berry); border-color: transparent; }
-  form button { border: none; cursor: pointer; font: inherit; font-weight: 800; }
-  .thanks { display: none; color: var(--berry); font-weight: 600; }
+  .custom .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+  @media (max-width: 860px) { .custom .wrap { grid-template-columns: 1fr; gap: 48px; } }
+  .custom .intro p { color: var(--soft); margin-top: 20px; max-width: 40ch; }
+  .steps { margin-top: 40px; display: grid; gap: 0; }
+  .step { display: grid; grid-template-columns: 48px 1fr; padding: 18px 0; border-top: 1px solid var(--line); }
+  .step b { font-size: 14px; color: var(--accent); }
+  .step strong { display: block; font-weight: 600; }
+  .step span { color: var(--soft); font-size: 15px; }
+  form { display: grid; gap: 16px; padding: 32px; border: 1px solid var(--line); border-radius: 18px; }
+  form h3 { font-size: 22px; letter-spacing: -0.02em; }
+  label { font-size: 13px; font-weight: 600; display: grid; gap: 6px; }
+  input, select, textarea { font: inherit; font-size: 15px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .two { grid-template-columns: 1fr; } }
+  form button { cursor: pointer; font: inherit; font-weight: 600; }
+  .thanks { display: none; font-size: 14px; color: var(--accent); }
 
-  .reviews { background: var(--plum); color: var(--cream); text-align: center; }
-  .reviews .big { font-family: var(--display); font-size: clamp(64px, 10vw, 96px); color: var(--butter); line-height: 1; }
-  .reviews p { color: #e6d3d8; max-width: 52ch; margin: 16px auto 0; }
+  .quote { text-align: center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 88px 0; }
+  .quote .big { font-size: clamp(56px, 9vw, 96px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; }
+  .quote p { color: var(--soft); max-width: 48ch; margin: 18px auto 0; }
 
-  .visit .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; }
-  .visit h3 { font-size: 22px; margin-bottom: 10px; }
-  .hours { display: grid; grid-template-columns: auto 1fr; gap: 4px 20px; font-size: 16px; }
-  .hours span:nth-child(odd) { font-weight: 600; }
+  .visit .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 48px; }
+  @media (max-width: 760px) { .visit .grid { grid-template-columns: 1fr; gap: 28px; } }
+  .visit h3 { font-size: 15px; font-weight: 700; letter-spacing: 0; margin-bottom: 10px; }
+  .visit p, .hours { color: var(--soft); }
+  .hours { display: grid; grid-template-columns: auto 1fr; gap: 2px 24px; }
 
-  footer { border-top: 1px solid #ead7da; padding: 28px 0; font-size: 14px; color: var(--muted); }
+  footer { padding: 32px 0 40px; font-size: 13px; color: var(--soft); border-top: 1px solid var(--line); }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
 </style>
 </head>
 <body>
 
-<div class="concept">Concept preview made by David Gayle for Just Baked Cakes &amp; Pies. This is not their official website.</div>
+<div class="concept">Concept preview made by David Gayle for Just Baked Cakes &amp; Pies. Not their official website.</div>
 
 <nav>
   <div class="wrap">
     <a class="logo" href="#">Just Baked<span>.</span></a>
     <ul>
       <li><a href="#menu">Menu</a></li>
-      <li><a href="#custom">Custom Cakes</a></li>
+      <li><a href="#custom">Custom cakes</a></li>
       <li><a href="#visit">Visit</a></li>
     </ul>
     <a class="btn" href="tel:7172363626" style="padding:10px 18px;font-size:14px">Call to order</a>
@@ -111,98 +119,88 @@
 
 <header class="hero">
   <div class="wrap">
-    <div>
-      <span class="kicker">Midtown Harrisburg</span>
-      <h1>Baked from scratch, <em>just for you.</em></h1>
-      <p>Cakes, pies, cupcakes, and cheesecake made by hand right here in Midtown. Stop in for a slice, or order a custom cake for your next celebration.</p>
-      <div class="ctas">
-        <a class="btn" href="#custom">Order a custom cake</a>
-        <a class="btn alt" href="#menu">See what's baking</a>
-      </div>
-      <div class="badge"><span class="stars">★★★★★</span> 4.8 stars from 70+ customer ratings</div>
+    <span class="label">Midtown Harrisburg Bakery</span>
+    <h1>Cakes and pies, made from scratch.</h1>
+    <p>Fresh-baked every week in Midtown. Stop in for a slice, or let us make the cake for your next celebration.</p>
+    <div class="ctas">
+      <a class="btn" href="#custom">Order a custom cake</a>
+      <a class="btn line" href="#menu">View the menu</a>
     </div>
-    <div class="art" aria-hidden="true">
-      <svg viewBox="0 0 200 200">
-        <ellipse cx="100" cy="128" rx="84" ry="30" fill="#3b1f2b" opacity=".12"/>
-        <path d="M18 112 L100 60 L182 112 L182 130 Q100 160 18 130 Z" fill="#e9b86a"/>
-        <path d="M18 112 Q100 140 182 112 L182 130 Q100 160 18 130 Z" fill="#d49a48"/>
-        <path d="M30 108 L100 66 L170 108 Q100 132 30 108 Z" fill="#b8325a"/>
-        <path d="M18 112 Q30 104 42 112 Q54 120 66 112 Q78 104 90 114 Q100 120 110 114 Q122 104 134 112 Q146 120 158 112 Q170 104 182 112" fill="none" stroke="#f3cf8a" stroke-width="8" stroke-linecap="round"/>
-        <path d="M60 92 L140 92 M50 100 L150 100 M75 82 L125 82" stroke="#f3cf8a" stroke-width="6" stroke-linecap="round"/>
-        <circle cx="100" cy="52" r="10" fill="#fffaf2"/>
-        <circle cx="100" cy="44" r="5" fill="#b8325a"/>
-      </svg>
-    </div>
+    <div class="rating"><b>4.8 ★</b> from 70+ customer ratings</div>
   </div>
 </header>
 
+<div class="wrap">
+  <div class="gallery">
+    <figure><img src="img/berry-cake.jpg" alt="Whipped cream cake topped with fresh strawberries, raspberries, blackberries, and blueberries"><figcaption>Fresh Berry Cream Cake<span>Whipped cream and fresh berries</span></figcaption></figure>
+    <figure><img src="img/carrot-cake.jpg" alt="Carrot cake with cream cheese frosting, piped carrots, and chopped nuts on the sides"><figcaption>Carrot Cake<span>Cream cheese frosting, nut-crusted sides</span></figcaption></figure>
+    <figure><img src="img/floral-cake.jpg" alt="White buttercream cake decorated with a crown of yellow, white, blue, and orange piped flowers and gold flakes"><figcaption>Buttercream Flower Cake<span>Hand-piped, made to order</span></figcaption></figure>
+  </div>
+</div>
+
 <section id="menu" class="menu">
   <div class="wrap">
-    <span class="kicker">Customer favorites</span>
-    <h2>What's in the case</h2>
-    <div class="grid">
-      <article class="item"><span class="tag">Pie</span><h3>Sweet Potato Pie</h3><p>Smooth, spiced, and buttery. The one people come back for.</p></article>
-      <article class="item"><span class="tag">Pie</span><h3>Bourbon Apple Pie</h3><p>Tender apples with a warm bourbon kick in a flaky crust.</p></article>
-      <article class="item"><span class="tag">Cupcakes</span><h3>Chocolate Peanut Butter</h3><p>Rich chocolate cupcakes topped with peanut buttercream.</p></article>
-      <article class="item"><span class="tag">Cake</span><h3>Carrot Cake</h3><p>Moist, layered, and finished with cream cheese frosting.</p></article>
-      <article class="item"><span class="tag">Cake</span><h3>Chocolate Cake</h3><p>A classic, deep chocolate layer cake. By the slice or whole.</p></article>
-      <article class="item"><span class="tag">Classic</span><h3>Cheesecake &amp; Bread Pudding</h3><p>Creamy cheesecake and old-fashioned bread pudding, made in house.</p></article>
+    <div class="menu-head">
+      <div><span class="label">Menu</span><h2 style="margin-top:12px">In the case</h2></div>
+      <p>Selection changes daily. Call ahead to reserve a whole pie or cake.</p>
     </div>
-    <p class="note">Selection changes daily. Pumpkin pie is here for the fall season. Call ahead to reserve whole pies for Thanksgiving.</p>
+    <div class="list">
+      <div class="row"><div><h3>Sweet Potato Pie</h3><p>Smooth, spiced, and buttery</p></div><span class="kind">Pie</span></div>
+      <div class="row"><div><h3>Chocolate Cake</h3><p>Deep chocolate layers, by the slice or whole</p></div><span class="kind">Cake</span></div>
+      <div class="row"><div><h3>Bourbon Apple Pie</h3><p>Tender apples with a warm bourbon finish</p></div><span class="kind">Pie</span></div>
+      <div class="row"><div><h3>Carrot Cake</h3><p>Cream cheese frosting, nut-crusted sides</p></div><span class="kind">Cake</span></div>
+      <div class="row"><div><h3>Pumpkin Pie</h3><p>A fall favorite, here for the season</p></div><span class="kind">Pie</span></div>
+      <div class="row"><div><h3>Chocolate Peanut Butter Cupcakes</h3><p>Topped with peanut buttercream</p></div><span class="kind">Cupcakes</span></div>
+      <div class="row"><div><h3>Cheesecake</h3><p>Rich, creamy, classic</p></div><span class="kind">Classic</span></div>
+      <div class="row"><div><h3>Bread Pudding</h3><p>Old-fashioned and warm</p></div><span class="kind">Classic</span></div>
+    </div>
   </div>
 </section>
 
 <section id="custom" class="custom">
   <div class="wrap">
-    <div>
-      <span class="kicker">Custom orders</span>
-      <h2>Cakes for every celebration</h2>
+    <div class="intro">
+      <span class="label">Custom orders</span>
+      <h2 style="margin-top:12px">A cake for every celebration.</h2>
+      <p>Birthdays, weddings, baby showers, and holidays. Tell us what you have in mind and we'll bake it fresh for your date.</p>
       <div class="steps">
-        <div class="step"><b>1</b><p><strong>Tell us about your event</strong>Birthday, wedding, baby shower, holiday, or just because.</p></div>
-        <div class="step"><b>2</b><p><strong>Pick your flavors</strong>Cake, filling, frosting, and how many people you're feeding.</p></div>
-        <div class="step"><b>3</b><p><strong>Pick it up fresh</strong>We'll confirm the details and have it ready on your date.</p></div>
+        <div class="step"><b>01</b><div><strong>Send a request</strong><span>Share the date, size, and flavors you want.</span></div></div>
+        <div class="step"><b>02</b><div><strong>We confirm the details</strong><span>We'll reach out to finalize design and price.</span></div></div>
+        <div class="step"><b>03</b><div><strong>Pick it up fresh</strong><span>Ready at the bakery on your day.</span></div></div>
       </div>
     </div>
     <form id="order">
-      <h3 style="font-size:26px">Request a custom cake</h3>
-      <label>Your name<input id="name" required></label>
-      <label>Phone or email<input id="contact" required></label>
-      <label>What are you celebrating?<select id="occasion"><option>Birthday</option><option>Wedding</option><option>Baby shower</option><option>Holiday</option><option>Something else</option></select></label>
-      <label>Date needed<input id="date" type="date"></label>
-      <label>Details (flavors, size, design ideas)<textarea id="details" rows="3"></textarea></label>
+      <h3>Request a custom cake</h3>
+      <div class="two">
+        <label>Name<input id="name" required></label>
+        <label>Phone or email<input id="contact" required></label>
+      </div>
+      <div class="two">
+        <label>Occasion<select id="occasion"><option>Birthday</option><option>Wedding</option><option>Baby shower</option><option>Holiday</option><option>Other</option></select></label>
+        <label>Date needed<input id="date" type="date"></label>
+      </div>
+      <label>Details<textarea id="details" rows="4" placeholder="Flavor, number of guests, colors, design ideas"></textarea></label>
       <button class="btn" type="submit">Send request</button>
       <p class="thanks" id="thanks">This is a preview, so no request was sent.</p>
     </form>
   </div>
 </section>
 
-<section class="reviews">
+<div class="quote">
   <div class="wrap">
     <div class="big">4.8 ★</div>
-    <p>Customers rate Just Baked five stars for food, service, and atmosphere, and they keep mentioning the kindness of the baker behind the counter.</p>
+    <p>Customers give Just Baked top marks for food, service, and atmosphere, and keep mentioning the kindness of the baker behind the counter.</p>
   </div>
-</section>
+</div>
 
 <section id="visit" class="visit">
   <div class="wrap">
-    <div>
-      <span class="kicker">Visit</span>
-      <h3>Find us</h3>
-      <p>270 Verbeke St<br>Harrisburg, PA 17102<br>A short walk from the Broad Street Market</p>
-    </div>
-    <div>
-      <span class="kicker">Hours</span>
-      <h3>When we're open</h3>
-      <div class="hours">
-        <span>Tue–Fri</span><span>10 AM – 4 PM</span>
-        <span>Saturday</span><span>9 AM – 5 PM</span>
-        <span>Sun–Mon</span><span>Closed</span>
-      </div>
-    </div>
-    <div>
-      <span class="kicker">Order</span>
-      <h3>Call us</h3>
-      <p><a href="tel:7172363626">(717) 236-3626</a><br>Custom cakes: please order at least a few days ahead.</p>
+    <span class="label">Visit</span>
+    <h2 style="margin-top:12px">Come say hi.</h2>
+    <div class="grid">
+      <div><h3>Location</h3><p>270 Verbeke St<br>Harrisburg, PA 17102<br>Near the Broad Street Market</p></div>
+      <div><h3>Hours</h3><div class="hours"><span>Tue–Fri</span><span>10 AM – 4 PM</span><span>Saturday</span><span>9 AM – 5 PM</span><span>Sun–Mon</span><span>Closed</span></div></div>
+      <div><h3>Orders</h3><p><a href="tel:7172363626">(717) 236-3626</a><br>Please order custom cakes a few days ahead.</p></div>
     </div>
   </div>
 </section>
