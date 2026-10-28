@@ -8,16 +8,18 @@
 <meta name="description" content="Homemade cakes, pies, cupcakes, and cheesecake in Midtown Harrisburg. Custom cakes for birthdays, holidays, and every celebration.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Caveat:wght@600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #161616;
-    --soft: #6e6e6e;
-    --line: #ececec;
-    --bg: #ffffff;
-    --tint: #f7f6f4;
-    --accent: #c2410c;
+    --ink: #3b2a21;
+    --soft: #7f6a5d;
+    --line: #eadfd2;
+    --bg: #fdf8f1;
+    --tint: #f6e9df;
+    --accent: #b24a5b;
     --font: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "Fraunces", Georgia, serif;
+    --hand: "Caveat", "Bradley Hand", cursive;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -25,19 +27,20 @@
   a { color: inherit; }
   img { display: block; max-width: 100%; }
   .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-  h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+  h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 600; letter-spacing: -0.015em; line-height: 1.08; }
   p { margin: 0; }
-  .label { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--soft); }
+  .label { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .hand { font-family: var(--hand); font-size: 26px; color: var(--accent); line-height: 1.2; }
   .btn { display: inline-block; text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 24px; border-radius: 999px; background: var(--ink); color: #fff; border: 1px solid var(--ink); transition: opacity .15s; }
   .btn:hover { opacity: .85; }
   .btn.line { background: transparent; color: var(--ink); }
   section { padding: 104px 0; }
 
-  .concept { background: var(--tint); color: var(--soft); text-align: center; font-size: 12px; padding: 8px 12px; }
+  .concept { background: var(--ink); color: #f6e9df !important; color: var(--soft); text-align: center; font-size: 12px; padding: 8px 12px; }
 
   nav { border-bottom: 1px solid var(--line); }
   nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 72px; gap: 16px; }
-  .logo { font-weight: 800; font-size: 18px; letter-spacing: -0.02em; text-decoration: none; }
+  .logo { font-family: var(--serif); font-weight: 600; font-size: 22px; text-decoration: none; }
   .logo span { color: var(--accent); }
   nav ul { list-style: none; display: flex; gap: 32px; margin: 0; padding: 0; font-size: 14px; font-weight: 500; }
   nav ul a { text-decoration: none; color: var(--soft); }
@@ -46,15 +49,20 @@
 
   .hero { padding: 88px 0 72px; }
   .hero h1 { font-size: clamp(44px, 7.5vw, 88px); max-width: 13ch; margin: 18px 0 24px; }
-  .hero p { font-size: 18px; color: var(--soft); max-width: 46ch; }
+  .hero .hand { font-size: 30px; color: var(--accent); }
+  .hero p:not(.hand) { font-size: 18px; color: var(--soft); max-width: 46ch; }
   .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
   .rating { display: flex; align-items: center; gap: 10px; margin-top: 28px; font-size: 14px; color: var(--soft); }
   .rating b { color: var(--ink); }
 
   .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 32px; }
   .gallery figure { margin: 0; }
-  .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; background: var(--tint); }
-  .gallery figcaption { margin-top: 12px; font-size: 14px; font-weight: 600; }
+  .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 24px; background: var(--tint); border: 8px solid #fff; box-shadow: 0 12px 30px rgba(59,42,33,.12); transition: transform .25s; }
+  .gallery figure:nth-child(1) img { transform: rotate(-2deg); }
+  .gallery figure:nth-child(3) img { transform: rotate(2deg); }
+  .gallery figure img:hover { transform: rotate(0) scale(1.02); }
+  .gallery figcaption { margin-top: 16px; font-family: var(--serif); font-size: 19px; font-weight: 600; text-align: center; }
+  .gallery figcaption span { font-family: var(--font); font-size: 14px; }
   .gallery figcaption span { display: block; font-weight: 400; color: var(--soft); }
   @media (max-width: 720px) { .gallery { grid-template-columns: 1fr 1fr; } .gallery figure:last-child { grid-column: span 2; } }
 
@@ -64,10 +72,10 @@
   .menu-head p { color: var(--soft); max-width: 36ch; }
   .list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; }
   @media (max-width: 720px) { .list { grid-template-columns: 1fr; } }
-  .row { display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; border-top: 1px solid #e2e0dc; }
-  .row h3 { font-size: 18px; letter-spacing: -0.01em; }
+  .row { display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; border-top: 1px dashed #d9c3b3; }
+  .row h3 { font-size: 20px; }
   .row p { color: var(--soft); font-size: 14px; margin-top: 4px; }
-  .row .kind { font-size: 12px; font-weight: 600; color: var(--soft); white-space: nowrap; padding-top: 4px; }
+  .row .kind { font-size: 12px; font-weight: 600; color: var(--accent); background: #fff; border-radius: 999px; padding: 3px 10px; height: fit-content; white-space: nowrap; padding-top: 4px; }
 
   .custom .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
   @media (max-width: 860px) { .custom .wrap { grid-template-columns: 1fr; gap: 48px; } }
@@ -77,23 +85,23 @@
   .step b { font-size: 14px; color: var(--accent); }
   .step strong { display: block; font-weight: 600; }
   .step span { color: var(--soft); font-size: 15px; }
-  form { display: grid; gap: 16px; padding: 32px; border: 1px solid var(--line); border-radius: 18px; }
+  form { display: grid; gap: 16px; padding: 32px; background: #fff; border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 12px 40px rgba(59,42,33,.08); }
   form h3 { font-size: 22px; letter-spacing: -0.02em; }
   label { font-size: 13px; font-weight: 600; display: grid; gap: 6px; }
-  input, select, textarea { font: inherit; font-size: 15px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); }
+  input, select, textarea { font: inherit; font-size: 15px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--ink); }
   input:focus, select:focus, textarea:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 480px) { .two { grid-template-columns: 1fr; } }
   form button { cursor: pointer; font: inherit; font-weight: 600; }
   .thanks { display: none; font-size: 14px; color: var(--accent); }
 
-  .quote { text-align: center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 88px 0; }
-  .quote .big { font-size: clamp(56px, 9vw, 96px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; }
-  .quote p { color: var(--soft); max-width: 48ch; margin: 18px auto 0; }
+  .quote { text-align: center; background: var(--ink); color: var(--bg); padding: 96px 0; }
+  .quote .big { font-family: var(--serif); font-size: clamp(56px, 9vw, 96px); font-weight: 600; line-height: 1; color: #f2c9a8; }
+  .quote p { color: #e6d6c8; max-width: 48ch; margin: 18px auto 0; }
 
   .visit .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 48px; }
   @media (max-width: 760px) { .visit .grid { grid-template-columns: 1fr; gap: 28px; } }
-  .visit h3 { font-size: 15px; font-weight: 700; letter-spacing: 0; margin-bottom: 10px; }
+  .visit h3 { font-size: 20px; margin-bottom: 10px; }
   .visit p, .hours { color: var(--soft); }
   .hours { display: grid; grid-template-columns: auto 1fr; gap: 2px 24px; }
 
@@ -120,8 +128,9 @@
 <header class="hero">
   <div class="wrap">
     <span class="label">Midtown Harrisburg Bakery</span>
+    <p class="hand" style="margin-top:14px">Baked with love in Midtown</p>
     <h1>Cakes and pies, made from scratch.</h1>
-    <p>Fresh-baked every week in Midtown. Stop in for a slice, or let us make the cake for your next celebration.</p>
+    <p>The kind of desserts you grew up on: sweet potato pie, carrot cake, and bourbon apple pie, baked by hand. Stop in for a slice, or let us make the cake for your next celebration.</p>
     <div class="ctas">
       <a class="btn" href="#custom">Order a custom cake</a>
       <a class="btn line" href="#menu">View the menu</a>
@@ -141,7 +150,7 @@
 <section id="menu" class="menu">
   <div class="wrap">
     <div class="menu-head">
-      <div><span class="label">Menu</span><h2 style="margin-top:12px">In the case</h2></div>
+      <div><span class="label">Menu</span><h2 style="margin-top:12px">What's in the case today</h2></div>
       <p>Selection changes daily. Call ahead to reserve a whole pie or cake.</p>
     </div>
     <div class="list">
@@ -197,6 +206,7 @@
   <div class="wrap">
     <span class="label">Visit</span>
     <h2 style="margin-top:12px">Come say hi.</h2>
+    <p class="hand" style="margin-top:8px">There's usually something warm coming out of the oven.</p>
     <div class="grid">
       <div><h3>Location</h3><p>270 Verbeke St<br>Harrisburg, PA 17102<br>Near the Broad Street Market</p></div>
       <div><h3>Hours</h3><div class="hours"><span>Tue–Fri</span><span>10 AM – 4 PM</span><span>Saturday</span><span>9 AM – 5 PM</span><span>Sun–Mon</span><span>Closed</span></div></div>
