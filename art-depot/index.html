@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>GBS Art Depot | Fine Art Supplies in Mechanicsburg, PA</title>
+<meta name="description" content="Family-owned fine art supply store in Mechanicsburg since 1993. Paints, brushes, canvas, airbrushes and accessories, professional and student grade, at discount prices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300;400;600&family=Kalam:wght@400;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral: #f25c5a;
+    --coral-dark: #d94543;
+    --ink: #2b2b2b;
+    --paper: #fbf8f3;
+    --wall: #f1ece4;
+    --carpet: #9e1e22;
+    --blue: #2d6fb5;
+    --muted: #6d6863;
+    --slab: "Josefin Slab", "Courier New", serif;
+    --hand: "Kalam", "Bradley Hand", cursive;
+    --body: "Karla", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font: 400 17px/1.65 var(--body); color: var(--ink); background: var(--paper); }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  h1, h2, h3 { font-family: var(--slab); font-weight: 400; margin: 0 0 14px; line-height: 1.1; letter-spacing: 1px; }
+  p { margin: 0 0 16px; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 84px 0; }
+  .hand { font-family: var(--hand); color: var(--coral); font-size: 24px; display: block; margin-bottom: 6px; }
+  .title { font-size: clamp(34px, 5vw, 50px); text-transform: uppercase; }
+  .btn { display: inline-block; white-space: nowrap; text-decoration: none; font-weight: 700; font-size: 16px; padding: 13px 26px; border-radius: 3px; background: var(--coral); color: #fff; border: 2px solid var(--coral); transition: background .2s; }
+  .btn:hover { background: var(--coral-dark); border-color: var(--coral-dark); }
+  .btn.line { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn.line:hover { background: var(--ink); color: #fff; }
+
+  .notice { background: var(--ink); color: #bdb7af; font-size: 12px; text-align: center; padding: 6px 12px; }
+
+  header { background: #fff; border-bottom: 1px solid #e8e2d8; position: sticky; top: 0; z-index: 20; }
+  header .container { display: flex; align-items: center; justify-content: space-between; height: 86px; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo img { width: 64px; height: 64px; }
+  .logo span { font-family: var(--slab); font-size: 22px; letter-spacing: 2px; text-transform: uppercase; line-height: 1.05; }
+  .logo small { display: block; font-size: 13px; letter-spacing: 3px; color: var(--muted); }
+  nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+  nav a { text-decoration: none; font-weight: 500; }
+  nav a:hover { color: var(--coral); }
+  .burger { display: none; background: none; border: 1px solid #ddd; border-radius: 3px; padding: 8px 12px; font: inherit; font-weight: 700; cursor: pointer; }
+  @media (max-width: 860px) {
+    .burger { display: block; }
+    nav { position: absolute; top: 86px; left: 0; right: 0; background: #fff; border-bottom: 1px solid #e8e2d8; display: none; }
+    nav.open { display: block; }
+    nav ul { flex-direction: column; gap: 0; }
+    nav li a { display: block; padding: 14px 20px; border-top: 1px solid #f1ece4; }
+    header .call { display: none; }
+  }
+
+  /* Hero */
+  .hero { background: var(--wall); }
+  .hero .container { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; padding-top: 70px; padding-bottom: 70px; }
+  @media (max-width: 860px) { .hero .container { grid-template-columns: 1fr; gap: 36px; padding-top: 48px; padding-bottom: 48px; } }
+  .hero h1 { font-size: clamp(40px, 6.5vw, 70px); text-transform: uppercase; }
+  .hero h1 .script { display: block; font-family: var(--hand); text-transform: none; color: var(--coral); font-size: .72em; letter-spacing: 0; margin-top: 6px; }
+  .hero p { font-size: 19px; color: #4a4642; max-width: 520px; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .hero .photo { position: relative; justify-self: center; max-width: 360px; }
+  .hero .photo img { border-radius: 4px; box-shadow: 0 14px 34px rgba(0,0,0,.18); }
+  .hero .photo .tag { position: absolute; left: -24px; bottom: 28px; background: #fff; padding: 10px 16px; border-radius: 3px; box-shadow: 0 6px 18px rgba(0,0,0,.12); font-family: var(--hand); font-size: 20px; transform: rotate(-4deg); }
+  @media (max-width: 860px) { .hero .photo .tag { left: 8px; } }
+
+  .facts { background: var(--coral); color: #fff; }
+  .facts .container { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+  .facts div { padding: 20px 10px; }
+  .facts b { display: block; font-family: var(--slab); font-weight: 600; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
+  .facts small { font-size: 15px; opacity: .95; }
+  .facts div + div { border-left: 1px solid rgba(255,255,255,.35); }
+  @media (max-width: 700px) { .facts .container { grid-template-columns: 1fr; } .facts div + div { border-left: 0; border-top: 1px solid rgba(255,255,255,.35); } }
+
+  /* Supplies */
+  .supplies .head { text-align: center; max-width: 640px; margin: 0 auto 44px; }
+  .supplies .head p { color: var(--muted); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+  .tile { background: #fff; border: 1px solid #e8e2d8; border-top: 4px solid var(--coral); padding: 26px 24px; }
+  .tile:nth-child(3n+2) { border-top-color: var(--blue); }
+  .tile:nth-child(3n) { border-top-color: #e3a32c; }
+  .tile h3 { font-size: 24px; font-weight: 600; }
+  .tile p { color: #57524d; font-size: 16px; margin: 0; }
+
+  .brands { margin-top: 44px; text-align: center; color: var(--muted); }
+  .brands span { display: inline-block; font-family: var(--slab); font-weight: 600; font-size: 22px; color: var(--ink); margin: 6px 16px; letter-spacing: 1px; }
+
+  /* Story */
+  .story { background: #fff; border-top: 1px solid #e8e2d8; border-bottom: 1px solid #e8e2d8; }
+  .story .container { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
+  @media (max-width: 860px) { .story .container { grid-template-columns: 1fr; } }
+  .story .pics { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .story .pics img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 3px; }
+  .story .pics img:last-child { margin-top: 40px; aspect-ratio: 1; }
+  .story p { color: #4a4642; }
+
+  /* Cat */
+  .cat { text-align: center; }
+  .cat .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; max-width: 760px; margin: 34px auto 0; }
+  @media (max-width: 600px) { .cat .wrap { grid-template-columns: 1fr; } }
+  .polaroid { background: #fff; padding: 12px 12px 18px; box-shadow: 0 8px 22px rgba(0,0,0,.12); }
+  .polaroid:first-child { transform: rotate(-2deg); }
+  .polaroid:last-child { transform: rotate(2deg); }
+  .polaroid img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .polaroid figcaption { font-family: var(--hand); font-size: 20px; margin-top: 10px; }
+  .cat p.lead { color: var(--muted); max-width: 540px; margin: 0 auto; }
+
+  /* Visit */
+  .visit { background: var(--wall); }
+  .visit .container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; }
+  @media (max-width: 860px) { .visit .container { grid-template-columns: 1fr; } }
+  .info { display: grid; gap: 4px; margin-bottom: 22px; font-size: 18px; }
+  .info a { text-decoration: none; font-weight: 700; }
+  .hours { width: 100%; max-width: 360px; border-collapse: collapse; margin: 8px 0 24px; }
+  .hours td { padding: 8px 0; border-bottom: 1px solid #ddd5ca; }
+  .hours td:last-child { text-align: right; font-weight: 700; }
+  .map { border: 6px solid #fff; box-shadow: 0 8px 22px rgba(0,0,0,.1); min-height: 400px; }
+  .map iframe { width: 100%; height: 100%; min-height: 400px; border: 0; display: block; }
+  .small { font-size: 14px; color: var(--muted); }
+
+  footer { background: var(--ink); color: #c9c3bb; padding: 50px 0 20px; font-size: 15px; }
+  footer .cols { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 34px; }
+  @media (max-width: 760px) { footer .cols { grid-template-columns: 1fr; } }
+  footer h4 { font-family: var(--slab); font-weight: 600; font-size: 20px; letter-spacing: 1px; text-transform: uppercase; color: #fff; margin: 0 0 10px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--coral); }
+  footer .script { font-family: var(--hand); font-size: 34px; color: var(--coral); line-height: 1; }
+  footer .bottom { margin-top: 36px; padding-top: 16px; border-top: 1px solid #3d3d3d; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="notice">Concept website designed by David Gayle for GBS Art Depot. Not the official site.</div>
+
+<header>
+  <div class="container">
+    <a class="logo" href="#top"><img src="img/logo.jpg" alt="GBS Art Depot logo"><span>GBS Art Depot<small>Mechanicsburg, PA</small></span></a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav">
+      <ul>
+        <li><a href="#supplies">Supplies</a></li>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#cat">Shop Cat</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+    <a class="btn call" href="tel:7177961400">(717) 796-1400</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="container">
+    <div>
+      <span class="hand">Family owned since 1993</span>
+      <h1>Fine Art Supplies<span class="script">for every kind of artist</span></h1>
+      <p>Paints, brushes, canvas, airbrushes and accessories, in professional and student grades, at discount prices. Stop in and talk to people who actually know the materials.</p>
+      <div class="ctas">
+        <a class="btn" href="#visit">Visit the Shop</a>
+        <a class="btn line" href="tel:7177961400">Call (717) 796-1400</a>
+      </div>
+    </div>
+    <div class="photo">
+      <img src="img/shop-cat.jpg" alt="The shop cat walking down an aisle of paints and brushes on the red carpet inside GBS Art Depot">
+      <div class="tag">Our aisles (and our cat)</div>
+    </div>
+  </div>
+</section>
+
+<div class="facts">
+  <div class="container">
+    <div><b>Since 1993</b><small>Over 30 years in Mechanicsburg</small></div>
+    <div><b>Pro &amp; Student</b><small>Artist-quality and beginner materials</small></div>
+    <div><b>Discount Prices</b><small>Professional supplies for less</small></div>
+  </div>
+</div>
+
+<section class="section supplies" id="supplies">
+  <div class="container">
+    <div class="head">
+      <span class="hand">What's on our shelves</span>
+      <h2 class="title">Everything for the Studio</h2>
+      <p>Whether you're a working painter or picking up a first set of brushes, we stock the materials and we'll help you choose.</p>
+    </div>
+    <div class="grid">
+      <div class="tile"><h3>Oil Paints</h3><p>A full wall of artist oil colors, including Holbein, in every hue you're after.</p></div>
+      <div class="tile"><h3>Acrylic &amp; Watercolor</h3><p>Tubes, sets, and mediums for every style, from student sets to pro-grade pigments.</p></div>
+      <div class="tile"><h3>Airbrushes &amp; Accessories</h3><p>Airbrushes, parts, paints, and accessories for fine art, custom work, and hobby use.</p></div>
+      <div class="tile"><h3>Canvas &amp; Surfaces</h3><p>Stretched canvas, panels, and pads, including Fredrix Red Label primed cotton.</p></div>
+      <div class="tile"><h3>Brushes &amp; Tools</h3><p>Brushes in every shape and size, palette knives, easels, and studio basics.</p></div>
+      <div class="tile"><h3>Drawing &amp; Drafting</h3><p>Pencils, charcoal, markers, sketchbooks, and drafting supplies.</p></div>
+    </div>
+    <div class="brands">
+      Brands you'll find in store:<br>
+      <span>Holbein</span><span>Schmincke</span><span>Fredrix</span><span>&amp; many more</span>
+    </div>
+  </div>
+</section>
+
+<section class="section story" id="story">
+  <div class="container">
+    <div class="pics">
+      <img src="img/holbein-oils.jpg" alt="Wall display of Holbein artist oil color tubes">
+      <img src="img/wall-sign.jpg" alt="Hand-painted Art Depot sign on the shop's outside wall: fine art supplies, airbrushes and accessories">
+    </div>
+    <div>
+      <span class="hand">Our story</span>
+      <h2 class="title">A Real Art Store, Run by Artists' Neighbors</h2>
+      <p>GBS Art Depot opened its doors in Mechanicsburg in the summer of 1993. More than thirty years later, we're still family owned, and our goal hasn't changed: give local artists the best materials available at prices that don't break the bank.</p>
+      <p>You won't find us in a strip of big-box stores. Look for the hand-painted sign and the graffiti mural on North Arch Street. Inside, our staff can answer questions, recommend products, and help you find exactly what your project needs.</p>
+      <p><strong>Gift certificates available</strong>, the perfect present for the artist in your life.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section cat" id="cat">
+  <div class="container">
+    <span class="hand">Say hi when you visit</span>
+    <h2 class="title">Meet Our Shop Cat</h2>
+    <p class="lead">Our resident supervisor patrols the aisles, inspects new canvas deliveries, and is always happy to help you pick a color.</p>
+    <div class="wrap">
+      <figure class="polaroid"><img src="img/shop-cat.jpg" alt="Shop cat walking past the paint aisles"><figcaption>On patrol</figcaption></figure>
+      <figure class="polaroid"><img src="img/cat-canvas.jpg" alt="Shop cat sniffing tubes of paint on a Fredrix canvas pad"><figcaption>Quality control</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="section visit" id="visit">
+  <div class="container">
+    <div>
+      <span class="hand">Come see us</span>
+      <h2 class="title">Visit the Shop</h2>
+      <div class="info">
+        <span>105 N Arch St, Mechanicsburg, PA 17055</span>
+        <a href="tel:7177961400">(717) 796-1400</a>
+      </div>
+      <table class="hours">
+        <tr><td>Monday – Friday</td><td>9 AM – 7 PM</td></tr>
+        <tr><td>Saturday</td><td>9 AM – 4 PM</td></tr>
+        <tr><td>Sunday</td><td>Closed</td></tr>
+      </table>
+      <p class="small">Hours can change around holidays. Give us a call before you make a special trip.</p>
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=105+N+Arch+St+Mechanicsburg+PA+17055" target="_blank" rel="noopener">Get Directions</a>
+    </div>
+    <div class="map">
+      <iframe title="Map to GBS Art Depot" src="https://maps.google.com/maps?q=105%20N%20Arch%20St%2C%20Mechanicsburg%2C%20PA%2017055&amp;z=16&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="cols">
+      <div>
+        <div class="script">Art Depot</div>
+        <p style="margin-top:12px">Fine art supplies, airbrushes and accessories. Family owned in Mechanicsburg since 1993.</p>
+        <a href="https://www.facebook.com/GBSArtDepot" target="_blank" rel="noopener">Find us on Facebook</a>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#supplies">Supplies</a></li>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#cat">Shop Cat</a></li>
+          <li><a href="#visit">Hours &amp; Directions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>105 N Arch St</li>
+          <li>Mechanicsburg, PA 17055</li>
+          <li><a href="tel:7177961400">(717) 796-1400</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>&copy; 2026 GBS Art Depot</span>
+      <span>Concept site designed by David Gayle</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var burger = document.getElementById('burger');
+  var nav = document.getElementById('nav');
+  burger.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { nav.classList.remove('open'); burger.setAttribute('aria-expanded', false); }
+  });
+</script>
+</body>
+</html>
