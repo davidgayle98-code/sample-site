@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Angelina's Brewery & Grill | Mechanicsburg, PA</title>
+<meta name="description" content="Burgers, wings, flatbreads, pasta, craft cocktails, and cold beer at Angelina's Brewery & Grill, 398 N York St, Mechanicsburg. Open 7 days. Happy hour 4–6 PM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #121212;
+    --coal: #1c1c1c;
+    --panel: #242424;
+    --red: #d8291f;
+    --red-glow: #ff4b3a;
+    --amber: #f2b33d;
+    --cream: #f4ede2;
+    --muted: #b9b1a6;
+    --slab: "Alfa Slab One", Rockwell, Georgia, serif;
+    --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+    --cond: "Barlow Condensed", "Arial Narrow", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font: 400 17px/1.6 var(--body); color: var(--cream); background: var(--black); }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  h1, h2, h3 { font-family: var(--slab); font-weight: 400; margin: 0 0 14px; line-height: 1.1; letter-spacing: .5px; }
+  p { margin: 0 0 16px; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 90px 0; }
+  .eyebrow { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--red-glow); font-size: 15px; display: block; margin-bottom: 10px; }
+  .title { font-size: clamp(34px, 5vw, 52px); }
+  .btn { display: inline-block; white-space: nowrap; font-family: var(--cond); font-weight: 700; font-size: 18px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; padding: 13px 28px; border-radius: 4px; border: 2px solid var(--red); background: var(--red); color: #fff; transition: background .2s, border-color .2s; }
+  .btn:hover { background: var(--red-glow); border-color: var(--red-glow); }
+  .btn.ghost { background: transparent; border-color: var(--cream); color: var(--cream); }
+  .btn.ghost:hover { background: var(--cream); color: var(--black); }
+
+  .notice { background: #000; color: #8f8a83; font-size: 12px; text-align: center; padding: 6px 12px; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 30; background: rgba(18,18,18,.96); border-bottom: 1px solid #2c2c2c; backdrop-filter: blur(6px); }
+  header .container { display: flex; align-items: center; justify-content: space-between; height: 78px; gap: 18px; }
+  .brand { text-decoration: none; line-height: 1; }
+  .brand b { display: block; font-family: var(--slab); font-weight: 400; font-size: 28px; color: var(--red); text-shadow: 0 0 14px rgba(255,75,58,.45); letter-spacing: 1px; }
+  .brand span { display: block; font-family: var(--cond); font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: var(--cream); margin-top: 3px; }
+  nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+  nav a { text-decoration: none; font-family: var(--cond); font-weight: 600; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; }
+  nav a:hover { color: var(--red-glow); }
+  .head-actions { display: flex; gap: 10px; align-items: center; }
+  .head-actions .btn { padding: 9px 18px; font-size: 16px; }
+  .burger { display: none; background: none; border: 0; padding: 8px; cursor: pointer; }
+  .burger span { display: block; width: 28px; height: 3px; background: var(--cream); margin: 6px 0; }
+  @media (max-width: 920px) {
+    .burger { display: block; }
+    nav { position: absolute; top: 78px; left: 0; right: 0; background: var(--coal); display: none; border-bottom: 1px solid #2c2c2c; }
+    nav.open { display: block; }
+    nav ul { flex-direction: column; gap: 0; }
+    nav li a { display: block; padding: 15px 20px; border-top: 1px solid #2c2c2c; }
+    .head-actions .call { display: none; }
+  }
+  @media (max-width: 420px) { .head-actions .btn { padding: 8px 12px; font-size: 14px; } .brand b { font-size: 23px; } }
+
+  /* Hero */
+  .hero { position: relative; min-height: 620px; display: flex; align-items: flex-end; background: url("img/storefront.jpg") center top/cover; }
+  .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,18,18,.55) 0%, rgba(18,18,18,.85) 50%, var(--black) 100%); }
+  .hero .container { position: relative; padding-bottom: 70px; padding-top: 140px; width: 100%; }
+  .hero h1 { font-size: clamp(44px, 8vw, 88px); max-width: 12ch; text-shadow: 0 4px 30px rgba(0,0,0,.6); }
+  .hero h1 em { font-style: normal; color: var(--red-glow); text-shadow: 0 0 22px rgba(255,75,58,.55); }
+  .hero p { font-size: clamp(18px, 2.4vw, 22px); max-width: 560px; color: #e6ded2; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+
+  .strip { background: var(--red); }
+  .strip .container { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+  .strip div { padding: 18px 10px; font-family: var(--cond); font-weight: 700; font-size: 19px; letter-spacing: 1px; text-transform: uppercase; }
+  .strip div + div { border-left: 1px solid rgba(255,255,255,.25); }
+  .strip small { display: block; font-family: var(--body); font-weight: 500; font-size: 14px; letter-spacing: 0; text-transform: none; opacity: .9; }
+  @media (max-width: 700px) { .strip .container { grid-template-columns: 1fr; } .strip div + div { border-left: 0; border-top: 1px solid rgba(255,255,255,.25); } .strip div { padding: 12px; } }
+
+  /* About */
+  .about .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  @media (max-width: 900px) { .about .container { grid-template-columns: 1fr; gap: 36px; } }
+  .about .pics { position: relative; }
+  .about .pics img { width: 100%; border-radius: 6px; }
+  .about .pics .badge { position: absolute; right: -14px; bottom: -14px; width: 42%; border: 5px solid var(--black); border-radius: 50%; aspect-ratio: 1; object-fit: cover; }
+  @media (max-width: 900px) { .about .pics .badge { right: 10px; } }
+  .about p { color: #d8d0c4; }
+  .feats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  .feats div { background: var(--panel); border-left: 3px solid var(--red); padding: 12px 14px; font-family: var(--cond); font-weight: 600; font-size: 18px; letter-spacing: .5px; }
+
+  /* Happy hour */
+  .hh { background: radial-gradient(ellipse at center, #2a1210 0%, var(--black) 70%); text-align: center; border-top: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a; }
+  .neon { display: inline-block; font-family: var(--slab); font-size: clamp(44px, 9vw, 96px); color: #ffd9d4; text-shadow: 0 0 6px #ff4b3a, 0 0 18px #ff4b3a, 0 0 40px #d8291f, 0 0 80px #d8291f; line-height: 1; margin-bottom: 8px; }
+  .hh .time { font-family: var(--cond); font-size: clamp(26px, 4vw, 38px); font-weight: 700; color: var(--amber); letter-spacing: 2px; }
+  .hh p { color: var(--muted); max-width: 560px; margin: 16px auto 0; }
+  .hh .deals { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
+  .hh .deals span { border: 1px solid #3b3b3b; padding: 10px 18px; border-radius: 40px; font-family: var(--cond); font-weight: 600; font-size: 18px; }
+
+  /* Menu */
+  .menu-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 26px; }
+  .menu-head p { color: var(--muted); margin: 0; max-width: 420px; }
+  .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 30px; scrollbar-width: thin; }
+  .tabs button { flex: 0 0 auto; font-family: var(--cond); font-weight: 700; font-size: 17px; letter-spacing: 1px; text-transform: uppercase; background: var(--panel); color: var(--cream); border: 1px solid #333; padding: 9px 16px; border-radius: 4px; cursor: pointer; }
+  .tabs button.active, .tabs button:hover { background: var(--cream); color: var(--black); border-color: var(--cream); }
+  .tabs button:focus-visible { outline: 2px solid var(--red-glow); outline-offset: 2px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .panel .note { font-family: var(--cond); font-size: 18px; color: var(--amber); letter-spacing: .5px; margin-bottom: 14px; }
+  .items { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
+  @media (max-width: 760px) { .items { grid-template-columns: 1fr; } }
+  .it { padding: 14px 0; border-bottom: 1px dashed #3a3a3a; }
+  .it .row { display: flex; align-items: baseline; gap: 10px; }
+  .it h4 { margin: 0; font-family: var(--cond); font-weight: 700; font-size: 21px; letter-spacing: .5px; text-transform: uppercase; }
+  .it .dots { flex: 1; border-bottom: 2px dotted #4a4a4a; transform: translateY(-5px); min-width: 20px; }
+  .it .pr { font-family: var(--cond); font-weight: 700; font-size: 20px; color: var(--amber); white-space: nowrap; }
+  .it p { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
+  .fine { color: #7d7770; font-size: 13px; margin-top: 26px; }
+
+  /* Reviews */
+  .rating { background: var(--coal); text-align: center; }
+  .rating .big { font-family: var(--slab); font-size: 76px; line-height: 1; color: var(--cream); }
+  .rating .stars { color: var(--amber); font-size: 28px; letter-spacing: 6px; margin: 8px 0 6px; }
+  .rating p { color: var(--muted); }
+
+  /* Visit */
+  .visit .container { display: grid; grid-template-columns: 1fr 1.25fr; gap: 50px; }
+  @media (max-width: 900px) { .visit .container { grid-template-columns: 1fr; } }
+  .hours { width: 100%; border-collapse: collapse; margin: 8px 0 26px; font-size: 17px; }
+  .hours td { padding: 10px 0; border-bottom: 1px solid #2e2e2e; }
+  .hours td:last-child { text-align: right; font-family: var(--cond); font-weight: 700; font-size: 19px; }
+  .visit .contact { display: grid; gap: 8px; margin-bottom: 26px; font-size: 18px; }
+  .visit .contact a { text-decoration: none; color: var(--cream); }
+  .visit .contact a:hover { color: var(--red-glow); }
+  .map { border-radius: 6px; overflow: hidden; border: 1px solid #2e2e2e; min-height: 420px; }
+  .map iframe { width: 100%; height: 100%; min-height: 420px; border: 0; display: block; filter: grayscale(.25) contrast(1.05); }
+
+  footer { background: #0b0b0b; border-top: 3px solid var(--red); padding: 50px 0 20px; color: var(--muted); font-size: 15px; }
+  footer .cols { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 36px; }
+  @media (max-width: 760px) { footer .cols { grid-template-columns: 1fr; } }
+  footer h4 { font-family: var(--cond); font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream); margin: 0 0 12px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--red-glow); }
+  footer .bottom { margin-top: 40px; padding-top: 18px; border-top: 1px solid #222; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="notice">Concept website designed by David Gayle for Angelina's Brewery &amp; Grill. Not the official site.</div>
+
+<header>
+  <div class="container">
+    <a class="brand" href="#top"><b>ANGELINA'S</b><span>Brewery &amp; Grill</span></a>
+    <nav id="nav">
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#happy-hour">Happy Hour</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+    <div class="head-actions">
+      <a class="btn ghost call" href="tel:7174585036">Call</a>
+      <a class="btn" href="https://angelinasbreweryandgrill0119.s4shops.com/" target="_blank" rel="noopener">Order Online</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="container">
+    <span class="eyebrow">398 N York St &middot; Mechanicsburg</span>
+    <h1>Burgers, Beer &amp; <em>Good Times.</em></h1>
+    <p>A locally owned, family-run bar and grill. Stacked burgers, wings, flatbreads, homemade pasta, craft cocktails, and cold drafts, plus every big game on the TVs.</p>
+    <div class="ctas">
+      <a class="btn" href="#menu">See the Menu</a>
+      <a class="btn ghost" href="https://angelinasbreweryandgrill0119.s4shops.com/" target="_blank" rel="noopener">Order for Pickup</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="container">
+    <div>Open 7 Days<small>Lunch &amp; dinner, 11 AM daily</small></div>
+    <div>Happy Hour 4–6 PM<small>Every day at the bar</small></div>
+    <div>Dine In &middot; Pickup &middot; Delivery<small>Order online or on Uber Eats</small></div>
+  </div>
+</div>
+
+<section class="section about" id="about">
+  <div class="container">
+    <div class="pics">
+      <img src="img/dining-room.jpg" alt="Angelina's dining room with wood-plank walls, booths, and the burger-and-beer mural">
+      <img class="badge" src="img/logo-art.jpg" alt="Angelina's burger and beer mug logo art">
+    </div>
+    <div>
+      <span class="eyebrow">Welcome In</span>
+      <h2 class="title">Your New Neighborhood Spot</h2>
+      <p>Angelina's is a locally owned family restaurant right on York Street. We serve food off the grill, Italian favorites from the kitchen, craft cocktails, wine, and cold beer, in a roomy dining room with a lively bar.</p>
+      <p>Come in for lunch, grab a seat at the bar for the game, or bring the whole family for dinner. There's something on the menu for everybody, including the kids.</p>
+      <div class="feats">
+        <div>Big-Screen Sports</div>
+        <div>Daily Specials</div>
+        <div>Craft Cocktails</div>
+        <div>Trivia Nights</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hh" id="happy-hour">
+  <div class="container">
+    <div class="neon">Happy Hour</div>
+    <div class="time">Every Day &middot; 4 PM – 6 PM</div>
+    <p>Wind down after work at the bar. Ask your server about this week's drink and appetizer specials.</p>
+    <div class="deals">
+      <span>Cold Drafts</span>
+      <span>Mules</span>
+      <span>Craft Cocktails</span>
+      <span>Bar Bites</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <div class="container">
+    <div class="menu-head">
+      <div><span class="eyebrow">Food &amp; Drink</span><h2 class="title" style="margin:0">The Menu</h2></div>
+      <p>Burgers and sandwiches come with french fries. Large plates come with your choice of two sides.</p>
+    </div>
+
+    <div class="tabs" role="tablist" id="tabs">
+      <button class="active" data-tab="starters">Starters</button>
+      <button data-tab="burgers">Burgers</button>
+      <button data-tab="flatbreads">Flatbreads</button>
+      <button data-tab="pasta">Pasta &amp; Entrées</button>
+      <button data-tab="plates">Large Plates</button>
+      <button data-tab="salads">Salads &amp; Wraps</button>
+      <button data-tab="drinks">Drinks</button>
+      <button data-tab="brunch">Brunch</button>
+      <button data-tab="kids">Kids</button>
+    </div>
+
+    <div class="panel active" id="starters">
+      <div class="items">
+        <div class="it"><div class="row"><h4>Wings</h4><span class="dots"></span><span class="pr">5 for 7.99 &middot; 10 for 14.99</span></div><p>Mild, hot, BBQ, honey mustard, Old Bay, lemon pepper, Cajun, or garlic parmesan. With ranch or blue cheese and celery.</p></div>
+        <div class="it"><div class="row"><h4>Sicilian Wings (10)</h4><span class="dots"></span><span class="pr">17.00</span></div><p>Kalamata olives, tomato, capers, chili pepper.</p></div>
+        <div class="it"><div class="row"><h4>Boneless Buffalo Wings</h4><span class="dots"></span><span class="pr">10.99</span></div><p>Breaded white meat chicken in mild or hot sauce.</p></div>
+        <div class="it"><div class="row"><h4>Nachos</h4><span class="dots"></span><span class="pr">12.99</span></div><p>Steak or chicken, nacho cheese, tomato, scallion, sour cream, salsa.</p></div>
+        <div class="it"><div class="row"><h4>Southwestern Quesadilla</h4><span class="dots"></span><span class="pr">12.99</span></div><p>Steak or chicken, cheddar, onions, peppers, sour cream, salsa.</p></div>
+        <div class="it"><div class="row"><h4>Four Meatballs with Marinara</h4><span class="dots"></span><span class="pr">11.99</span></div><p>Shaved parmesan cheese.</p></div>
+        <div class="it"><div class="row"><h4>Fried Calamari</h4><span class="dots"></span><span class="pr">16.00</span></div><p>With marinara.</p></div>
+        <div class="it"><div class="row"><h4>Mussels and Clams</h4><span class="dots"></span><span class="pr">17.00</span></div><p>Spicy red sauce, served with toasted bread.</p></div>
+        <div class="it"><div class="row"><h4>Shrimp &amp; Avocado Ceviche</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Crab meat, tomatoes, lemon, lime, cilantro, jalapeño, tortilla chips.</p></div>
+        <div class="it"><div class="row"><h4>Classic or Eggplant Bruschetta</h4><span class="dots"></span><span class="pr">12.99</span></div><p>Fresh tomato, basil, garlic, olive oil, balsamic glaze.</p></div>
+        <div class="it"><div class="row"><h4>Steak Rolls (3)</h4><span class="dots"></span><span class="pr">13.00</span></div></div>
+        <div class="it"><div class="row"><h4>Shrimp Basket and Fries</h4><span class="dots"></span><span class="pr">13.00</span></div></div>
+        <div class="it"><div class="row"><h4>Loaded French Fries</h4><span class="dots"></span><span class="pr">12.00</span></div><p>Cheddar, bacon, tomato, scallion, sour cream.</p></div>
+        <div class="it"><div class="row"><h4>Fried Pickles</h4><span class="dots"></span><span class="pr">10.00</span></div><p>Served with ranch.</p></div>
+        <div class="it"><div class="row"><h4>Bacon Cheese Fries</h4><span class="dots"></span><span class="pr">10.00</span></div></div>
+        <div class="it"><div class="row"><h4>Jalapeño Poppers</h4><span class="dots"></span><span class="pr">8.00</span></div></div>
+        <div class="it"><div class="row"><h4>Old Bay Fries</h4><span class="dots"></span><span class="pr">7.00</span></div></div>
+        <div class="it"><div class="row"><h4>Chips and Salsa &middot; French Fries</h4><span class="dots"></span><span class="pr">5.00</span></div></div>
+        <div class="it"><div class="row"><h4>Soup of the Day</h4><span class="dots"></span><span class="pr">Cup 4.49 &middot; Bowl 7.00</span></div></div>
+      </div>
+    </div>
+
+    <div class="panel" id="burgers">
+      <p class="note">All burgers and sandwiches served with french fries.</p>
+      <div class="items">
+        <div class="it"><div class="row"><h4>Angelina's Burger</h4><span class="dots"></span><span class="pr">15.00</span></div><p>Fried egg, bacon, fried onions, mushroom, avocado, Swiss cheese.</p></div>
+        <div class="it"><div class="row"><h4>Smash Burger</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Lettuce, tomato, grilled onion, mushroom.</p></div>
+        <div class="it"><div class="row"><h4>Cheeseburger</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Lettuce, tomato, onion, mayo, American cheese.</p></div>
+        <div class="it"><div class="row"><h4>Bacon Cheddar Burger</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Lettuce, tomato, onion.</p></div>
+        <div class="it"><div class="row"><h4>Black &amp; Blue Burger</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Cajun-seasoned patty, blue cheese, lettuce, tomato.</p></div>
+        <div class="it"><div class="row"><h4>Mushroom Swiss Burger</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Lettuce, tomato, fried onion.</p></div>
+        <div class="it"><div class="row"><h4>Beef Sliders (3)</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Lettuce, tomato, cheddar cheese.</p></div>
+        <div class="it"><div class="row"><h4>Pulled Pork</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Lettuce, tomato.</p></div>
+        <div class="it"><div class="row"><h4>Grilled Chicken</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Lettuce, tomato, onion, mayo.</p></div>
+        <div class="it"><div class="row"><h4>Broiled Crab Cake</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Lettuce, tomato, tartar sauce.</p></div>
+        <div class="it"><div class="row"><h4>Fish Sandwich</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Lettuce, tomato, tartar sauce.</p></div>
+      </div>
+    </div>
+
+    <div class="panel" id="flatbreads">
+      <div class="items">
+        <div class="it"><div class="row"><h4>Margherita</h4><span class="dots"></span><span class="pr">12.00</span></div><p>Fresh mozzarella, tomato sauce, fresh basil, olive oil.</p></div>
+        <div class="it"><div class="row"><h4>San Daniele</h4><span class="dots"></span><span class="pr">15.00</span></div><p>Mozzarella, tomato sauce, prosciutto, parmesan, arugula, cherry tomato.</p></div>
+        <div class="it"><div class="row"><h4>Diavola</h4><span class="dots"></span><span class="pr">15.00</span></div><p>Fresh mozzarella, tomato sauce, salami, chili pepper, kalamata olive, sun-dried tomato.</p></div>
+        <div class="it"><div class="row"><h4>Italy Pizza</h4><span class="dots"></span><span class="pr">15.00</span></div><p>Mozzarella, pesto, sun-dried tomato, parmesan.</p></div>
+        <div class="it"><div class="row"><h4>Carne</h4><span class="dots"></span><span class="pr">15.00</span></div><p>Fresh mozzarella, tomato sauce, sopressata, prosciutto.</p></div>
+        <div class="it"><div class="row"><h4>Inferno Pizza</h4><span class="dots"></span><span class="pr">15.00</span></div><p>Tomato sauce, spicy hot sopressata, red pepper flakes.</p></div>
+      </div>
+    </div>
+
+    <div class="panel" id="pasta">
+      <p class="note">Entrées served with salad and bread. Choice of spaghetti, linguini, or penne.</p>
+      <div class="items">
+        <div class="it"><div class="row"><h4>Chicken Marsala</h4><span class="dots"></span><span class="pr">22.00</span></div><p>Mushroom sauce.</p></div>
+        <div class="it"><div class="row"><h4>Seafood Ravioli</h4><span class="dots"></span><span class="pr">27.00</span></div><p>Shrimp, baby scallops, mussels, spinach, creamy pink vodka sauce.</p></div>
+        <div class="it"><div class="row"><h4>Pasta allo Scoglio</h4><span class="dots"></span><span class="pr">25.00</span></div><p>Mussels, crab meat, clams, shrimp, baby scallops, wine sauce.</p></div>
+        <div class="it"><div class="row"><h4>Crab Alfredo</h4><span class="dots"></span><span class="pr">20.00</span></div></div>
+        <div class="it"><div class="row"><h4>Pasta alla Toscana</h4><span class="dots"></span><span class="pr">17.00</span></div><p>Sausage, mushroom, creamy pink vodka sauce.</p></div>
+        <div class="it"><div class="row"><h4>Tortellini della Casa</h4><span class="dots"></span><span class="pr">17.00</span></div><p>Mushroom, onion, pesto, cream sauce.</p></div>
+        <div class="it"><div class="row"><h4>Chicken della Casa</h4><span class="dots"></span><span class="pr">17.00</span></div><p>Chicken breast, mushroom, onion, cream sauce.</p></div>
+        <div class="it"><div class="row"><h4>Pasta Contadina</h4><span class="dots"></span><span class="pr">16.00</span></div><p>Creamy pink sauce with mixed vegetables.</p></div>
+        <div class="it"><div class="row"><h4>Sausage and Peppers</h4><span class="dots"></span><span class="pr">15.00</span></div></div>
+        <div class="it"><div class="row"><h4>Meatballs</h4><span class="dots"></span><span class="pr">15.00</span></div></div>
+        <div class="it"><div class="row"><h4>Meat Sauce</h4><span class="dots"></span><span class="pr">15.00</span></div><p>Melted mozzarella.</p></div>
+        <div class="it"><div class="row"><h4>Pasta Sicilian</h4><span class="dots"></span><span class="pr">15.00</span></div><p>Sautéed spinach, garlic, tomato, feta cheese.</p></div>
+        <div class="it"><div class="row"><h4>Vodka Sauce</h4><span class="dots"></span><span class="pr">14.00</span></div></div>
+        <div class="it"><div class="row"><h4>Alfredo Sauce</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Add chicken or shrimp +5.00</p></div>
+        <div class="it"><div class="row"><h4>Pasta Aurora</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Garlic, basil, creamy pink sauce.</p></div>
+      </div>
+    </div>
+
+    <div class="panel" id="plates">
+      <p class="note">Your choice of 2 sides: steak fries, mixed vegetables, Caesar or house salad, asparagus.</p>
+      <div class="items">
+        <div class="it"><div class="row"><h4>Crab Cakes</h4><span class="dots"></span><span class="pr">27.99</span></div><p>Served with roasted potatoes and vegetables.</p></div>
+        <div class="it"><div class="row"><h4>Salmon</h4><span class="dots"></span><span class="pr">26.00</span></div><p>Roasted potato, vegetables, kalamata olive, capers, sun-dried tomato.</p></div>
+        <div class="it"><div class="row"><h4>Full Rack Ribs</h4><span class="dots"></span><span class="pr">23.99</span></div></div>
+        <div class="it"><div class="row"><h4>Pork Chops</h4><span class="dots"></span><span class="pr">20.49</span></div></div>
+        <div class="it"><div class="row"><h4>Half Rack Ribs</h4><span class="dots"></span><span class="pr">18.49</span></div></div>
+        <div class="it"><div class="row"><h4>Fish and Chips</h4><span class="dots"></span><span class="pr">17.00</span></div></div>
+      </div>
+    </div>
+
+    <div class="panel" id="salads">
+      <p class="note">Salads served with bread. Wraps served with french fries.</p>
+      <div class="items">
+        <div class="it"><div class="row"><h4>Grilled Salmon Salad</h4><span class="dots"></span><span class="pr">17.99</span></div><p>Mixed greens, cucumber, cherry tomato, red onion, kalamata olive, feta.</p></div>
+        <div class="it"><div class="row"><h4>Cobb</h4><span class="dots"></span><span class="pr">14.99</span></div><p>Mixed greens, grilled chicken, bacon, hard-boiled egg, avocado, red onion, cheddar, croutons.</p></div>
+        <div class="it"><div class="row"><h4>Tuscany Chicken</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Romaine, red onion, cherry tomato, kalamata olive, Italian dressing, fresh mozzarella.</p></div>
+        <div class="it"><div class="row"><h4>Caprese</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Fresh tomato, fresh mozzarella, basil, olive oil, balsamic glaze.</p></div>
+        <div class="it"><div class="row"><h4>Greek</h4><span class="dots"></span><span class="pr">12.00</span></div><p>Romaine, red onion, cherry tomato, kalamata olive, feta, Greek dressing.</p></div>
+        <div class="it"><div class="row"><h4>Caesar</h4><span class="dots"></span><span class="pr">9.99</span></div><p>Romaine, croutons, shaved parmesan. Add chicken +4.00</p></div>
+        <div class="it"><div class="row"><h4>House</h4><span class="dots"></span><span class="pr">7.99</span></div><p>Mixed greens, cherry tomato, red onion, kalamata olive.</p></div>
+        <div class="it"><div class="row"><h4>Wraps</h4><span class="dots"></span><span class="pr">14.00</span></div><p>Grilled chicken, buffalo chicken, BBQ chicken, chicken bacon ranch, or chicken Caesar.</p></div>
+      </div>
+    </div>
+
+    <div class="panel" id="drinks">
+      <div class="items">
+        <div class="it"><div class="row"><h4>Classic Cocktails</h4><span class="dots"></span><span class="pr">9.00</span></div><p>Old Fashioned, Manhattan, Double Espresso Martini, French 75.</p></div>
+        <div class="it"><div class="row"><h4>Specialty Cocktails</h4><span class="dots"></span><span class="pr">11.00</span></div><p>The Godfather, The Classic Penicillin, The Sicilian.</p></div>
+        <div class="it"><div class="row"><h4>Classic Negroni</h4><span class="dots"></span><span class="pr">10.00</span></div><p>Gin, vodka, sweet vermouth, orange twist.</p></div>
+        <div class="it"><div class="row"><h4>Mules</h4><span class="dots"></span><span class="pr">7.00</span></div><p>Angelina's Mule, Tennessee Mule, Irish Mule.</p></div>
+        <div class="it"><div class="row"><h4>Draft Beer</h4><span class="dots"></span><span class="pr">3.00 – 4.00</span></div><p>Yuengling Lager, Tröegs Perpetual IPA, Stacy's Mom, Joose Juicy, New Trail, and rotating local taps.</p></div>
+        <div class="it"><div class="row"><h4>Canned &amp; Bottled Beer</h4><span class="dots"></span><span class="pr">3.50 – 5.00</span></div></div>
+        <div class="it"><div class="row"><h4>Wine by the Glass</h4><span class="dots"></span><span class="pr">8.00 – 9.00</span></div><p>Chardonnay, Sauvignon Blanc, Pinot Grigio, White Zinfandel, Prosecco, Merlot. Bottles 35.00</p></div>
+        <div class="it"><div class="row"><h4>Vodka Drinks</h4><span class="dots"></span><span class="pr">Ask your server</span></div><p>Hurricane Katrina, Raspberry Kamikaze, The Happy Gilmore, Electric Shock, White Gummy Bear, and more.</p></div>
+        <div class="it"><div class="row"><h4>Soft Drinks &amp; Coffee</h4><span class="dots"></span><span class="pr">2.00 – 3.00</span></div><p>Free refills on fountain drinks.</p></div>
+      </div>
+    </div>
+
+    <div class="panel" id="brunch">
+      <p class="note">All entrées served with one side: bacon, sausage, home fries, or hash browns. Additional sides 5.00</p>
+      <div class="items">
+        <div class="it"><div class="row"><h4>Country Fried Steak &amp; Eggs</h4><span class="dots"></span><span class="pr">25.00</span></div><p>Hand-battered steak topped with sawmill gravy.</p></div>
+        <div class="it"><div class="row"><h4>South of the Border Burrito</h4><span class="dots"></span><span class="pr">18.00</span></div><p>Scrambled eggs, chorizo, peppers, onions, queso fresco cream sauce, pico de gallo.</p></div>
+        <div class="it"><div class="row"><h4>Fried Chicken &amp; Waffles</h4><span class="dots"></span><span class="pr">17.00</span></div><p>Hand-battered tenders over Liège waffles with maple syrup.</p></div>
+        <div class="it"><div class="row"><h4>The Italian Omelet</h4><span class="dots"></span><span class="pr">17.00</span></div><p>Pepperoni, sopressata, salami, peppers, onions, fresh mozzarella.</p></div>
+        <div class="it"><div class="row"><h4>Eggs Benedict</h4><span class="dots"></span><span class="pr">16.00</span></div><p>Poached eggs over Canadian bacon and English muffins, house-made hollandaise.</p></div>
+        <div class="it"><div class="row"><h4>Breakfast Flatbread</h4><span class="dots"></span><span class="pr">15.00</span></div><p>House sauce, eggs, bacon, peppers, onions, fresh mozzarella.</p></div>
+        <div class="it"><div class="row"><h4>Biscuits &amp; Gravy</h4><span class="dots"></span><span class="pr">14.00</span></div><p>House-made biscuits with sausage sawmill gravy.</p></div>
+      </div>
+    </div>
+
+    <div class="panel" id="kids">
+      <p class="note">For kids 12 and under.</p>
+      <div class="items">
+        <div class="it"><div class="row"><h4>Macaroni and Cheese</h4><span class="dots"></span><span class="pr">8.00</span></div></div>
+        <div class="it"><div class="row"><h4>Mini Cheeseburger with Fries</h4><span class="dots"></span><span class="pr">8.00</span></div></div>
+        <div class="it"><div class="row"><h4>Penne with Bread</h4><span class="dots"></span><span class="pr">8.00</span></div></div>
+      </div>
+    </div>
+
+    <p class="fine">Menu and prices shown are a sample and may change. Consuming raw or undercooked meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness.</p>
+  </div>
+</section>
+
+<section class="section rating">
+  <div class="container">
+    <span class="eyebrow">Reviews</span>
+    <div class="big">4.2</div>
+    <div class="stars">★★★★☆</div>
+    <p>From 76 reviews on Google. Stop in and see why your neighbors keep coming back.</p>
+  </div>
+</section>
+
+<section class="section visit" id="visit">
+  <div class="container">
+    <div>
+      <span class="eyebrow">Find Us</span>
+      <h2 class="title">Come Hang Out</h2>
+      <div class="contact">
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=398+N+York+St+Mechanicsburg+PA+17055" target="_blank" rel="noopener">398 N York St, Mechanicsburg, PA 17055</a>
+        <a href="tel:7174585036">(717) 458-5036</a>
+      </div>
+      <table class="hours">
+        <tr><td>Monday – Thursday</td><td>11 AM – 10 PM</td></tr>
+        <tr><td>Friday – Saturday</td><td>11 AM – 11 PM</td></tr>
+        <tr><td>Sunday</td><td>11 AM – 9 PM</td></tr>
+        <tr><td>Happy Hour</td><td>Daily 4 – 6 PM</td></tr>
+      </table>
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=398+N+York+St+Mechanicsburg+PA+17055" target="_blank" rel="noopener">Get Directions</a>
+    </div>
+    <div class="map">
+      <iframe title="Map to Angelina's Brewery &amp; Grill" src="https://maps.google.com/maps?q=398%20N%20York%20St%2C%20Mechanicsburg%2C%20PA%2017055&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="cols">
+      <div>
+        <a class="brand" href="#top"><b>ANGELINA'S</b><span>Brewery &amp; Grill</span></a>
+        <p style="margin-top:16px">Locally owned and family run. Burgers, pasta, craft cocktails, and cold beer on York Street in Mechanicsburg.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#happy-hour">Happy Hour</a></li>
+          <li><a href="https://angelinasbreweryandgrill0119.s4shops.com/" target="_blank" rel="noopener">Order Online</a></li>
+          <li><a href="https://www.facebook.com/p/Angelinas-Brewery-and-Grill-61573799825841/" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>398 N York St</li>
+          <li>Mechanicsburg, PA 17055</li>
+          <li><a href="tel:7174585036">(717) 458-5036</a></li>
+          <li>Open 7 days</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>&copy; 2026 Angelina's Brewery &amp; Grill</span>
+      <span>Concept site designed by David Gayle</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var burger = document.getElementById('burger');
+  var nav = document.getElementById('nav');
+  burger.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { nav.classList.remove('open'); burger.setAttribute('aria-expanded', false); }
+  });
+  document.getElementById('tabs').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    document.querySelectorAll('.tabs button').forEach(function (x) { x.classList.toggle('active', x === b); });
+    document.querySelectorAll('.panel').forEach(function (p) { p.classList.toggle('active', p.id === b.dataset.tab); });
+  });
+</script>
+</body>
+</html>
