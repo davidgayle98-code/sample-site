@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Ember &amp; Oak Kitchen | Sample Restaurant Website</title>
+<meta name="description" content="Sample restaurant website: live open hours, daily specials, a searchable menu, call-ahead pickup list, catering estimator and table requests.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --char: #17130f;
+    --char-2: #221c17;
+    --char-3: #2e2620;
+    --bone: #f2ede4;
+    --bone-2: #e7e0d3;
+    --ink: #1d1814;
+    --muted: #6d645a;
+    --muted-dark: #b5aa9b;
+    --ember: #e2562b;
+    --ember-hot: #ff6d3d;
+    --honey: #e9a93b;
+    --sage: #4f7a55;
+    --line: #d8cfc0;
+    --line-dark: #3a3029;
+    --serif: "DM Serif Display", Georgia, "Times New Roman", serif;
+    --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+    --img: "https://images.unsplash.com/";
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+  body { margin: 0; font: 400 17px/1.6 var(--sans); color: var(--ink); background: var(--bone); }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; line-height: 1.05; letter-spacing: -.01em; text-wrap: balance; }
+  p { margin: 0; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--honey); outline-offset: 2px; }
+  .container { max-width: 1180px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+  .section { padding: 96px 0; }
+  .eyebrow { display: block; font-weight: 800; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--ember); margin-bottom: 14px; }
+  .title { font-size: clamp(38px, 5.4vw, 60px); }
+  .lede { color: var(--muted); font-size: 18px; max-width: 54ch; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 15px; letter-spacing: .02em; text-decoration: none; padding: 14px 24px; border-radius: 999px; border: 2px solid var(--ember); background: var(--ember); color: #fff; transition: background .15s, transform .15s; white-space: nowrap; }
+  .btn:hover { background: var(--ember-hot); border-color: var(--ember-hot); transform: translateY(-1px); }
+  .btn.ghost { background: transparent; border-color: rgba(242,237,228,.55); color: var(--bone); }
+  .btn.ghost:hover { background: var(--bone); color: var(--char); border-color: var(--bone); }
+  .btn.line { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn.line:hover { background: var(--ink); color: var(--bone); }
+  .btn.sm { padding: 9px 16px; font-size: 14px; }
+  .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+  .price { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+  /* Notice + header */
+  .notice { background: #000; color: #a49a8c; font-size: 12.5px; text-align: center; padding: 7px 12px; }
+  .notice b { color: var(--honey); font-weight: 600; }
+  header { position: sticky; top: 0; z-index: 40; background: rgba(23,19,15,.94); color: var(--bone); border-bottom: 1px solid var(--line-dark); backdrop-filter: blur(8px); }
+  header .container { display: flex; align-items: center; gap: 22px; height: 76px; }
+  .brand { text-decoration: none; display: flex; align-items: baseline; gap: 10px; margin-right: auto; white-space: nowrap; }
+  .brand b { font-family: var(--serif); font-weight: 400; font-size: 27px; }
+  .brand b i { color: var(--ember); font-style: italic; }
+  .brand span { font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted-dark); }
+  nav ul { list-style: none; display: flex; gap: 26px; margin: 0; padding: 0; }
+  nav a { text-decoration: none; font-weight: 600; font-size: 15px; color: #ddd3c5; }
+  nav a:hover { color: var(--ember-hot); }
+  .burger { display: none; background: none; border: 0; padding: 8px; }
+  .burger span { display: block; width: 26px; height: 2px; background: var(--bone); margin: 6px 0; }
+  @media (max-width: 980px) {
+    .burger { display: block; order: 3; }
+    nav { position: absolute; top: 76px; left: 0; right: 0; background: var(--char-2); display: none; border-bottom: 1px solid var(--line-dark); }
+    nav.open { display: block; }
+    nav ul { flex-direction: column; gap: 0; padding: 8px max(20px, env(safe-area-inset-left)); }
+    nav li a { display: block; padding: 14px 0; border-bottom: 1px solid var(--line-dark); font-size: 17px; }
+    .head-call { display: none; }
+  }
+
+  /* Hero */
+  .hero { position: relative; color: var(--bone); background: var(--char); overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: url("https://images.unsplash.com/photo-1723967052599-93403a001bb1?auto=format&fit=crop&w=2000&q=70") center 40% / cover no-repeat; transform: scale(1.04); }
+  .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(23,19,15,.94) 0%, rgba(23,19,15,.78) 45%, rgba(23,19,15,.35) 100%), linear-gradient(0deg, rgba(23,19,15,.9) 0%, rgba(23,19,15,0) 40%); }
+  .hero .container { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr); gap: 48px; align-items: end; padding-top: 110px; padding-bottom: 80px; min-height: 640px; }
+  .hero h1 { font-size: clamp(54px, 8.6vw, 104px); }
+  .hero h1 em { color: var(--ember-hot); }
+  .hero .tagline { font-size: 20px; color: #e6dccd; max-width: 40ch; margin: 22px 0 28px; }
+  .status { display: inline-flex; align-items: center; gap: 9px; padding: 7px 14px; border-radius: 999px; font-size: 14px; font-weight: 700; margin-bottom: 26px; }
+  .status .dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px rgba(255,255,255,.08); }
+  .status.open { background: rgba(79,122,85,.25); color: #9fdca8; }
+  .status.open .dot { animation: pulse 2s infinite; }
+  .status.closed { background: rgba(226,86,43,.18); color: #ffb197; }
+  @keyframes pulse { 50% { opacity: .35; } }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .stars { color: var(--honey); letter-spacing: 3px; }
+  .hero-rating { display: flex; align-items: center; gap: 12px; margin-top: 28px; font-size: 15px; color: #d6cbbb; }
+  .special { background: rgba(34,28,23,.82); border: 1px solid rgba(233,169,59,.35); border-radius: 22px; padding: 26px; backdrop-filter: blur(6px); }
+  .special .eyebrow { color: var(--honey); margin-bottom: 10px; }
+  .special h3 { font-size: 32px; }
+  .special .row { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+  .special .row .price { font-size: 24px; color: var(--honey); font-weight: 800; }
+  .special p { color: #d6cbbb; margin-top: 10px; font-size: 15px; }
+  .special details { margin-top: 18px; border-top: 1px solid var(--line-dark); padding-top: 14px; }
+  .special summary { cursor: pointer; font-weight: 700; font-size: 14px; color: var(--bone); }
+  .special ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; font-size: 14px; color: #cfc3b2; }
+  .special li { display: flex; justify-content: space-between; gap: 12px; }
+  .special li.today { color: var(--honey); font-weight: 700; }
+  .owner-edit { display: none; gap: 8px; margin-top: 16px; padding: 14px; border-radius: 14px; background: rgba(233,169,59,.12); border: 1px dashed rgba(233,169,59,.5); }
+  body.owner .owner-edit { display: grid; }
+  .owner-edit input { width: 100%; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--line-dark); background: var(--char); color: var(--bone); }
+  .owner-edit .two { display: grid; grid-template-columns: minmax(0, 1fr) 96px; gap: 8px; }
+  .owner-tag { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--honey); }
+  @media (max-width: 900px) { .hero .container { grid-template-columns: minmax(0, 1fr); min-height: 0; padding-top: 72px; padding-bottom: 56px; gap: 36px; } }
+
+  /* Favorites */
+  .favs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 44px; }
+  .fav { position: relative; border-radius: 22px; overflow: hidden; background: var(--char); color: var(--bone); min-height: 420px; display: flex; align-items: flex-end; isolation: isolate; }
+  .fav img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .5s; }
+  .fav::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(23,19,15,.92) 0%, rgba(23,19,15,.1) 60%); z-index: -1; }
+  .fav:hover img { transform: scale(1.05); }
+  .fav .body { padding: 24px; width: 100%; }
+  .fav h3 { font-size: 30px; }
+  .fav p { color: #d6cbbb; font-size: 15px; margin: 6px 0 14px; }
+  .fav .row { display: flex; justify-content: space-between; align-items: center; }
+  .fav .price { font-size: 20px; color: var(--honey); }
+  @media (max-width: 860px) { .favs { grid-template-columns: minmax(0, 1fr); } .fav { min-height: 320px; } }
+
+  /* Menu */
+  .menu-sec { background: var(--bone-2); }
+  .menu-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 18px; }
+  .menu-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 36px; align-items: start; margin-top: 36px; }
+  .tools { position: sticky; top: 76px; z-index: 5; background: var(--bone-2); padding: 14px 0; display: grid; gap: 12px; border-bottom: 1px solid var(--line); }
+  .tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { white-space: nowrap; padding: 9px 18px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--bone); font-weight: 700; font-size: 14px; }
+  .tab[aria-selected="true"] { background: var(--char); border-color: var(--char); color: var(--bone); }
+  .search-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .search-row input { flex: 1 1 220px; padding: 11px 16px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--bone); }
+  .chip { padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: transparent; font-size: 13.5px; font-weight: 600; }
+  .chip[aria-pressed="true"] { border-color: var(--sage); background: var(--sage); color: #fff; }
+  .menu-list { margin-top: 10px; }
+  .cat-label { font-family: var(--serif); font-size: 30px; margin: 32px 0 6px; }
+  .dish { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .dish h4 { margin: 0; font-size: 18px; font-weight: 700; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .dish p { color: var(--muted); font-size: 15px; margin-top: 3px; }
+  .dish .price { font-size: 17px; }
+  .tag { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; }
+  .tag.fav-t { background: #f6dfb3; color: #7a4d06; }
+  .tag.veg { background: #d9e8d6; color: #2f5a35; }
+  .tag.gf { background: #e1e4ee; color: #3a4469; }
+  .tag.out { background: #f5d3c7; color: #8f2c12; }
+  .dish.soldout { opacity: .5; }
+  .add { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--ember); background: transparent; color: var(--ember); font-size: 22px; line-height: 1; display: grid; place-items: center; transition: background .15s, color .15s; }
+  .add:hover:not(:disabled) { background: var(--ember); color: #fff; }
+  .add:disabled { border-color: var(--line); color: var(--line); }
+  .owner86 { display: none; grid-column: 1 / -1; font-size: 13px; color: var(--muted); align-items: center; gap: 8px; }
+  body.owner .owner86 { display: flex; }
+  .empty { padding: 36px; text-align: center; color: var(--muted); border: 1.5px dashed var(--line); border-radius: 18px; margin-top: 24px; }
+  .cart { position: sticky; top: 96px; background: var(--char); color: var(--bone); border-radius: 22px; padding: 24px; display: grid; gap: 14px; }
+  .cart h3 { font-size: 28px; }
+  .cart .count { font-size: 13px; color: var(--muted-dark); }
+  .cart ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; max-height: 320px; overflow: auto; }
+  .cart li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; font-size: 14.5px; }
+  .qty { display: flex; align-items: center; gap: 7px; }
+  .qty button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line-dark); background: var(--char-3); color: var(--bone); }
+  .cart .placeholder { color: var(--muted-dark); font-size: 14.5px; padding: 18px; border: 1px dashed var(--line-dark); border-radius: 14px; text-align: center; }
+  .totals { border-top: 1px solid var(--line-dark); padding-top: 12px; display: grid; gap: 5px; font-size: 14.5px; color: #d6cbbb; }
+  .totals div { display: flex; justify-content: space-between; }
+  .totals .grand { color: var(--bone); font-size: 19px; font-weight: 800; margin-top: 4px; }
+  .callbox { display: none; gap: 6px; padding: 14px; border-radius: 14px; background: rgba(233,169,59,.12); border: 1px solid rgba(233,169,59,.4); font-size: 14px; }
+  .callbox.show { display: grid; }
+  .callbox a { font-size: 24px; font-weight: 800; color: var(--honey); text-decoration: none; }
+  .cart .fine { font-size: 12px; color: var(--muted-dark); }
+  @media (max-width: 960px) { .menu-wrap { grid-template-columns: minmax(0, 1fr); } .cart { position: static; } }
+
+  /* Gallery band */
+  .gallery { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: 260px 260px; gap: 14px; }
+  .gallery figure { margin: 0; border-radius: 18px; overflow: hidden; position: relative; }
+  .gallery figure:first-child { grid-row: 1 / 3; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; }
+  .gallery figcaption { position: absolute; left: 12px; bottom: 12px; background: rgba(23,19,15,.75); color: var(--bone); font-size: 12.5px; font-weight: 600; padding: 5px 10px; border-radius: 999px; }
+  @media (max-width: 760px) { .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 300px 180px 180px; } .gallery figure:first-child { grid-row: auto; grid-column: 1 / 3; } }
+
+  /* Catering + reservations */
+  .dark { background: var(--char); color: var(--bone); }
+  .dark .lede { color: var(--muted-dark); }
+  .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 40px; }
+  @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); } }
+  .panel { background: var(--char-2); border: 1px solid var(--line-dark); border-radius: 24px; padding: 30px; display: grid; gap: 18px; align-content: start; }
+  .panel h3 { font-size: 34px; }
+  .field { display: grid; gap: 7px; font-size: 14px; font-weight: 700; color: #ddd3c5; }
+  .field input, .field select, .field textarea { padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line-dark); background: var(--char); color: var(--bone); font-weight: 400; }
+  .field input[type=range] { padding: 0; accent-color: var(--ember); }
+  .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .err { color: #ff9f80; font-size: 13px; font-weight: 500; min-height: 1em; }
+  .pkg { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--line-dark); cursor: pointer; font-size: 15px; transition: border-color .15s, background .15s; }
+  .pkg:has(input:checked) { border-color: var(--ember); background: rgba(226,86,43,.1); }
+  .pkg input { accent-color: var(--ember); margin-right: 10px; }
+  .estimate { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 20px; border-radius: 16px; background: var(--ember); color: #fff; }
+  .estimate .big { font-family: var(--serif); font-size: 46px; line-height: 1; }
+  .estimate small { display: block; font-size: 13px; opacity: .9; }
+  .ok { display: none; padding: 14px 16px; border-radius: 14px; background: rgba(79,122,85,.25); color: #b5e6bc; font-size: 15px; }
+  .ok.show { display: block; }
+  .panel .fine { font-size: 13px; color: var(--muted-dark); }
+
+  /* Reviews */
+  .reviews { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 40px; }
+  .review { background: #fff; border-radius: 22px; padding: 28px; display: grid; gap: 14px; align-content: start; border: 1px solid var(--line); }
+  .review blockquote { margin: 0; font-family: var(--serif); font-size: 23px; line-height: 1.3; }
+  .review .who { font-size: 14px; color: var(--muted); }
+  .rating-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 18px; }
+  .rating-bar .score { font-family: var(--serif); font-size: 64px; line-height: 1; }
+  @media (max-width: 900px) { .reviews { grid-template-columns: minmax(0, 1fr); } }
+
+  /* Story + visit */
+  .story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+  .story img { border-radius: 24px; aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .timeline { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 18px; }
+  .timeline li { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 16px; }
+  .timeline b { font-family: var(--serif); font-weight: 400; font-size: 30px; color: var(--ember); line-height: 1; }
+  .timeline span { color: var(--muted); }
+  .timeline strong { display: block; color: var(--ink); }
+  @media (max-width: 860px) { .story { grid-template-columns: minmax(0, 1fr); gap: 32px; } .story img { aspect-ratio: 4 / 3; } }
+  .visit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 40px; }
+  .visit .card { background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 28px; display: grid; gap: 12px; align-content: start; }
+  .hours { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .hours td { padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .hours td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .hours tr.today td { color: var(--ember); font-weight: 800; }
+  @media (max-width: 900px) { .visit { grid-template-columns: minmax(0, 1fr); } }
+
+  footer { background: #000; color: #a49a8c; padding: 40px 0 120px; font-size: 14px; }
+  footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px; }
+  footer a { color: #d6cbbb; }
+  .owner-switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; color: var(--bone); font-weight: 700; }
+  .owner-switch input { appearance: none; width: 42px; height: 24px; border-radius: 999px; background: var(--char-3); border: 1px solid var(--line-dark); position: relative; margin: 0; cursor: pointer; }
+  .owner-switch input::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bone); transition: left .15s; }
+  .owner-switch input:checked { background: var(--honey); }
+  .owner-switch input:checked::after { left: 21px; }
+  @media (min-width: 901px) { footer { padding-bottom: 40px; } }
+
+  /* Mobile action bar */
+  .mbar { display: none; }
+  @media (max-width: 900px) {
+    .mbar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: rgba(23,19,15,.97); border-top: 1px solid var(--line-dark); padding: 10px max(12px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); }
+    .mbar .btn { padding: 12px 6px; font-size: 14.5px; }
+  }
+  .toast { position: fixed; left: 50%; bottom: calc(92px + env(safe-area-inset-bottom)); transform: translate(-50%, 10px); background: var(--bone); color: var(--char); padding: 11px 18px; border-radius: 999px; font-weight: 700; font-size: 14px; z-index: 60; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  @media (min-width: 901px) { .toast { bottom: 30px; } }
+</style>
+</head>
+<body>
+
+<div class="notice">Sample website by <b>David</b> · Ember &amp; Oak Kitchen is a placeholder. Your name, menu, and photos go here.</div>
+
+<header>
+  <div class="container">
+    <a class="brand" href="#top"><b>Ember <i>&amp;</i> Oak</b><span>Kitchen</span></a>
+    <nav id="nav" aria-label="Main">
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#catering">Catering</a></li>
+        <li><a href="#reserve">Reserve</a></li>
+        <li><a href="#story">Our story</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+    <a class="btn sm head-call" href="tel:+17175550186">(717) 555-0186</a>
+    <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div>
+      <span class="status" id="status"><span class="dot"></span><span id="statusText">Checking today's hours</span></span>
+      <h1>Cooked over <em>fire.</em><br>Served like family.</h1>
+      <p class="tagline">Scratch kitchen on Market Street. Wood-grilled burgers, house pasta, and pie baked every morning.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="#menu">See the menu</a>
+        <a class="btn ghost" href="#reserve">Request a table</a>
+      </div>
+      <div class="hero-rating"><span class="stars" aria-hidden="true">★★★★★</span><span><b style="color:var(--bone)">4.8</b> from 1,204 Google reviews</span></div>
+    </div>
+    <aside class="special" aria-labelledby="specialName">
+      <span class="eyebrow" id="specialDay">Today's special</span>
+      <div class="row"><h3 id="specialName">Today's special</h3><span class="price" id="specialPrice"></span></div>
+      <p id="specialDesc"></p>
+      <div class="owner-edit">
+        <span class="owner-tag">Owner view · edit today's special</span>
+        <div class="two"><input id="editName" aria-label="Special name"><input id="editPrice" aria-label="Special price" inputmode="decimal"></div>
+        <input id="editDesc" aria-label="Special description">
+      </div>
+      <details><summary>This week's specials</summary><ul id="weekList"></ul></details>
+    </aside>
+  </div>
+</section>
+
+<section class="section" id="favorites">
+  <div class="container">
+    <span class="eyebrow">House favorites</span>
+    <h2 class="title">What people drive across town for</h2>
+    <div class="favs">
+      <article class="fav">
+        <img src="https://images.unsplash.com/photo-1606149059549-6042addafc5a?auto=format&fit=crop&w=900&q=70" alt="Burger with lettuce and fries on a wooden table" loading="lazy">
+        <div class="body"><h3>The Ember Burger</h3><p>Wood-grilled, aged cheddar, smoked onion jam, hand-cut fries.</p><div class="row"><span class="price">$15</span><button class="btn sm" type="button" data-add="m11">Add to list</button></div></div>
+      </article>
+      <article class="fav">
+        <img src="https://images.unsplash.com/photo-1612548041350-853c0cd6e299?auto=format&fit=crop&w=900&q=70" alt="Pasta in red sauce on a white plate" loading="lazy">
+        <div class="body"><h3>Sunday Gravy Rigatoni</h3><p>Slow-braised pork and beef ragù, whipped ricotta, basil.</p><div class="row"><span class="price">$19</span><button class="btn sm" type="button" data-add="m6">Add to list</button></div></div>
+      </article>
+      <article class="fav">
+        <img src="https://images.unsplash.com/photo-1509461399763-ae67a981b254?auto=format&fit=crop&w=900&q=70" alt="Slice of pie on a white saucer" loading="lazy">
+        <div class="body"><h3>Shoofly Pie</h3><p>Wet-bottom molasses pie, Pennsylvania Dutch style. Gone by 7.</p><div class="row"><span class="price">$6</span><button class="btn sm" type="button" data-add="m20">Add to list</button></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section menu-sec" id="menu">
+  <div class="container">
+    <div class="menu-head">
+      <div><span class="eyebrow">Menu</span><h2 class="title">Eat in, or call it in</h2></div>
+      <p class="lede">Tap + to build a pickup list, then call it in. Sample prices shown.</p>
+    </div>
+    <div class="menu-wrap">
+      <div>
+        <div class="tools">
+          <div class="tabs" role="tablist" aria-label="Menu categories" id="tabs"></div>
+          <div class="search-row">
+            <input type="search" id="search" placeholder="Search burger, pasta, gluten-free…" aria-label="Search the menu">
+            <button class="chip" type="button" data-f="veg" aria-pressed="false">Vegetarian</button>
+            <button class="chip" type="button" data-f="gf" aria-pressed="false">Gluten-free</button>
+            <button class="chip" type="button" data-f="cheap" aria-pressed="false">Under $12</button>
+            <button class="chip" type="button" data-f="fav" aria-pressed="false">Favorites</button>
+          </div>
+        </div>
+        <div class="menu-list" id="menuList"></div>
+      </div>
+      <aside class="cart" id="cart" aria-labelledby="cartTitle">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><h3 id="cartTitle">Pickup list</h3><span class="count" id="cartCount">0 items</span></div>
+        <ul id="cartList"></ul>
+        <p class="placeholder" id="cartEmpty">Tap + on any dish to start your order.</p>
+        <div class="totals" id="totals" hidden>
+          <div><span>Subtotal</span><span class="price" id="sub">$0.00</span></div>
+          <div><span>PA sales tax (6%)</span><span class="price" id="tax">$0.00</span></div>
+          <div class="grand"><span>Estimated total</span><span class="price" id="total">$0.00</span></div>
+        </div>
+        <button class="btn" type="button" id="callOrder" disabled>Call to place this order</button>
+        <button class="btn ghost" type="button" id="onlineOrder" disabled>Order online</button>
+        <div class="callbox" id="callbox"><span>Call and read off your list:</span><a href="tel:+17175550186">(717) 555-0186</a><span class="fine">Ready in about 20 minutes.</span></div>
+        <p class="fine">Pickup list only. Orders are confirmed by phone.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-label="Photos">
+  <div class="container">
+    <div class="gallery">
+      <figure><img src="https://images.unsplash.com/photo-1758405155772-ef0f0077375c?auto=format&fit=crop&w=1200&q=70" alt="Warmly lit dining room" loading="lazy"><figcaption>The dining room</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1543168691-518c24c546ea?auto=format&fit=crop&w=700&q=70" alt="Pancakes with raspberries beside coffee mugs" loading="lazy"><figcaption>Sunday brunch</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1606149059549-6042addafc5a?auto=format&fit=crop&w=700&q=70" alt="Burger and fries" loading="lazy"><figcaption>Off the grill</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1723967052599-93403a001bb1?auto=format&fit=crop&w=700&q=70" alt="Flames rising from a pot on the stove" loading="lazy"><figcaption>The line</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1509461399763-ae67a981b254?auto=format&fit=crop&w=700&q=70" alt="Slice of pie" loading="lazy"><figcaption>Baked daily</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="section dark" id="catering">
+  <div class="container">
+    <span class="eyebrow">Catering and reservations</span>
+    <h2 class="title">Feeding a crowd, or just your table</h2>
+    <div class="split">
+      <div class="panel">
+        <h3>Catering estimator</h3>
+        <div class="field"><label for="guests">Guests: <span id="guestsOut" style="color:var(--honey)">30</span></label><input type="range" id="guests" min="10" max="150" step="5" value="30"></div>
+        <div style="display:grid;gap:10px" role="radiogroup" aria-label="Catering package">
+          <label class="pkg"><span><input type="radio" name="pkg" value="14" checked>Sandwich and salad platters</span><span class="price">$14 pp</span></label>
+          <label class="pkg"><span><input type="radio" name="pkg" value="19">Hot buffet, two mains, two sides</span><span class="price">$19 pp</span></label>
+          <label class="pkg"><span><input type="radio" name="pkg" value="24">Grill package, burgers and ribs</span><span class="price">$24 pp</span></label>
+        </div>
+        <label class="pkg"><span><input type="checkbox" id="dessert">Add pie and whoopie pies</span><span class="price">+$4 pp</span></label>
+        <div class="estimate"><div><small>Estimated total</small><span class="big" id="estOut">$420</span></div><div style="text-align:right"><small id="trays">3 trays</small><small id="pp">$14 per person</small></div></div>
+        <p class="fine">Estimate before tax and delivery. Final quote by phone.</p>
+      </div>
+      <form class="panel" id="reserve" novalidate>
+        <h3>Request a table</h3>
+        <div class="field"><label for="rName">Name</label><input id="rName" autocomplete="name" placeholder="Jordan Miller"><span class="err" id="eName"></span></div>
+        <div class="grid2">
+          <div class="field"><label for="rSize">Party size</label><select id="rSize"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>8+</option></select></div>
+          <div class="field"><label for="rPhone">Phone</label><input id="rPhone" inputmode="tel" autocomplete="tel" placeholder="717-555-0100"><span class="err" id="ePhone"></span></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label for="rDate">Date</label><input type="date" id="rDate"><span class="err" id="eDate"></span></div>
+          <div class="field"><label for="rTime">Time</label><select id="rTime"></select></div>
+        </div>
+        <div class="field"><label for="rNote">Anything we should know?</label><textarea id="rNote" rows="2" placeholder="Birthday, high chair, booth if possible"></textarea></div>
+        <button class="btn" type="submit">Request table</button>
+        <div class="ok" id="rOk" role="status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="container">
+    <span class="eyebrow">Reviews</span>
+    <h2 class="title">Regulars say it best</h2>
+    <div class="rating-bar"><span class="score">4.8</span><div><span class="stars" style="font-size:22px">★★★★★</span><br><span style="color:var(--muted)">1,204 Google reviews · sample excerpts</span></div></div>
+    <div class="reviews">
+      <figure class="review" style="margin:0"><span class="stars">★★★★★</span><blockquote>Best burger in the county and the pie is worth the drive on its own.</blockquote><figcaption class="who">Marcus T. · Google review</figcaption></figure>
+      <figure class="review" style="margin:0"><span class="stars">★★★★★</span><blockquote>Walked in with nine people, no reservation. Seated in ten minutes and treated like regulars.</blockquote><figcaption class="who">Lisa R. · Google review</figcaption></figure>
+      <figure class="review" style="margin:0"><span class="stars">★★★★★</span><blockquote>They catered our office lunch for forty. Hot, on time, and nothing left over.</blockquote><figcaption class="who">Angela W. · Google review</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="section menu-sec" id="story">
+  <div class="container story">
+    <img src="https://images.unsplash.com/photo-1723967052599-93403a001bb1?auto=format&fit=crop&w=1000&q=70" alt="Cooking over open flame in the kitchen" loading="lazy">
+    <div>
+      <span class="eyebrow">Our story</span>
+      <h2 class="title">Three generations on Market Street</h2>
+      <ol class="timeline">
+        <li><b>1987</b><span><strong>Twelve stools and a grill</strong>Ruth and Walt open with burgers and pie.</span></li>
+        <li><b>2004</b><span><strong>The dining room doubles</strong>Sunday brunch and the bakery case arrive.</span></li>
+        <li><b>2019</b><span><strong>The next generation</strong>Same recipes, plus catering for the whole valley.</span></li>
+        <li><b>Today</b><span><strong>Still from scratch</strong>Pies go in the oven before we unlock the door.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="visit">
+  <div class="container">
+    <span class="eyebrow">Visit</span>
+    <h2 class="title">Come hungry</h2>
+    <div class="visit">
+      <div class="card"><h3 style="font-size:26px">Hours</h3><table class="hours"><tbody id="hoursBody"></tbody></table></div>
+      <div class="card"><h3 style="font-size:26px">Find us</h3><p>120 Market Street<br>Your Town, PA 17000</p><p style="color:var(--muted);font-size:15px">Free lot behind the building. Ramp entrance on the side door.</p><a class="btn line sm" style="justify-self:start" href="https://www.google.com/maps/search/?api=1&query=120+Market+Street" target="_blank" rel="noopener">Get directions</a></div>
+      <div class="card"><h3 style="font-size:26px">Get in touch</h3><a href="tel:+17175550186" style="font-size:24px;font-weight:800;text-decoration:none;color:var(--ember)">(717) 555-0186</a><p style="color:var(--muted);font-size:15px">Gift cards at the register. Private room for up to 30.</p><a class="btn line sm" style="justify-self:start" href="#catering">Plan an event</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>Sample website by David · Ember &amp; Oak Kitchen is not a real business.<br>Photos from <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a>: Max Griss, Eiliv Aceron, Logan Jeffrey, Element5 Digital, Maddi Bazzocco, Aconitum.</div>
+    <label class="owner-switch" for="ownerMode"><input type="checkbox" id="ownerMode"> Owner view</label>
+  </div>
+</footer>
+
+<div class="mbar" aria-label="Quick actions">
+  <a class="btn" href="tel:+17175550186">Call</a>
+  <a class="btn ghost" href="#menu">Menu</a>
+  <a class="btn ghost" href="#cart" id="mList">List (0)</a>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const HOURS = { 0: [10, 20], 1: null, 2: [11, 21], 3: [11, 21], 4: [11, 21], 5: [11, 22], 6: [11, 22] };
+const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const SPECIALS = [
+  { n: "Sunday brunch skillet", p: 14, d: "Home fries, scrambled eggs, sausage gravy, buttermilk biscuit." },
+  { n: "Closed Mondays", p: null, d: "The kitchen rests. See you Tuesday." },
+  { n: "Taco Tuesday trio", p: 12, d: "Three wood-fired pork tacos, slaw, lime crema." },
+  { n: "Ham and bean soup with cornbread", p: 10, d: "A Wednesday tradition since 1987." },
+  { n: "Chicken and waffles", p: 16, d: "Buttermilk fried chicken, maple butter, hot honey." },
+  { n: "Beer-battered fish fry", p: 17, d: "Haddock, hand-cut fries, slaw, house tartar." },
+  { n: "Prime rib dinner", p: 28, d: "Slow-roasted, au jus, mashed potatoes, green beans." }
+];
+const MENU = [
+  ["Starters", "Loaded potato skins", "Cheddar, bacon, scallion, sour cream.", 9.5, "fav"],
+  ["Starters", "Crispy Brussels sprouts", "Maple-balsamic glaze, toasted pecans.", 8, "veg gf"],
+  ["Starters", "Spinach artichoke dip", "Baked to order, warm pita.", 10.5, "veg"],
+  ["Starters", "Wood-fired wings (8)", "Dry rub or buffalo, blue cheese.", 13, "gf"],
+  ["Starters", "Soup of the day", "Made fresh every morning.", 5, "veg"],
+  ["Mains", "Chicken pot pie", "Pennsylvania Dutch style, hand-cut noodles.", 16, "fav"],
+  ["Mains", "Sunday gravy rigatoni", "Pork and beef ragù, whipped ricotta, basil.", 19, "fav"],
+  ["Mains", "Cedar plank salmon", "Lemon butter, rice pilaf, asparagus.", 23, "gf"],
+  ["Mains", "Butternut squash ravioli", "Brown butter, sage, parmesan.", 18, "veg"],
+  ["Mains", "Half rack of ribs", "Applewood smoked, slaw, cornbread.", 22, "gf"],
+  ["Mains", "12 oz ribeye", "Baked potato, side salad.", 31, "gf"],
+  ["Burgers", "The Ember burger", "Aged cheddar, smoked onion jam, hand-cut fries.", 15, "fav"],
+  ["Burgers", "Classic smash burger", "Two patties, American cheese, pickles.", 13, ""],
+  ["Burgers", "Black bean burger", "Avocado, pepper jack, chipotle mayo.", 13, "veg"],
+  ["Burgers", "Grilled chicken club", "Bacon, Swiss, tomato, garlic aioli.", 14, ""],
+  ["Kids", "Chicken tenders", "With fries and applesauce.", 7.5, ""],
+  ["Kids", "Mac and cheese", "Baked cheddar mac.", 6.5, "veg"],
+  ["Kids", "Mini burgers", "Two sliders and fries.", 7, ""],
+  ["Desserts", "Whoopie pie", "Chocolate cake, marshmallow cream filling.", 4, "veg"],
+  ["Desserts", "Apple crisp", "Warm, with vanilla ice cream.", 7, "veg"],
+  ["Desserts", "Shoofly pie", "Wet-bottom molasses pie, by the slice.", 6, "veg fav"],
+  ["Drinks", "Fresh-brewed iced tea", "Free refills.", 3, "veg gf"],
+  ["Drinks", "Birch beer float", "Local birch beer, vanilla ice cream.", 5.5, "veg"],
+  ["Drinks", "Coffee", "Bottomless.", 2.5, "veg gf"]
+].map((m, i) => ({ id: "m" + i, cat: m[0], n: m[1], d: m[2], p: m[3], tags: m[4].split(" ").filter(Boolean) }));
+const CATS = ["All", "Starters", "Mains", "Burgers", "Kids", "Desserts", "Drinks"];
+
+const $ = s => document.querySelector(s);
+const money = n => "$" + n.toFixed(2);
+const fmtH = h => (h % 12 || 12) + " " + (h >= 12 ? "PM" : "AM");
+const state = { cat: "All", q: "", f: new Set(), cart: {}, out: new Set() };
+try { const s = JSON.parse(localStorage.getItem("eo-demo") || "null"); if (s) { state.cart = s.cart || {}; state.out = new Set(s.out || []); } } catch (e) {}
+const persist = () => { try { localStorage.setItem("eo-demo", JSON.stringify({ cart: state.cart, out: [...state.out] })); } catch (e) {} };
+function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 1800); }
+
+/* Mobile nav */
+const burger = $(".burger"), nav = $("#nav");
+burger.addEventListener("click", () => { const o = nav.classList.toggle("open"); burger.setAttribute("aria-expanded", o); });
+nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { nav.classList.remove("open"); burger.setAttribute("aria-expanded", false); }));
+
+/* Open now + hours */
+function status() {
+  const now = new Date(), d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  const open = t && h >= t[0] && h < t[1];
+  const el = $("#status"), tx = $("#statusText");
+  if (open) { el.className = "status open"; tx.textContent = "Open now · kitchen closes at " + fmtH(t[1]); }
+  else {
+    let msg = "";
+    if (t && h < t[0]) msg = "opens today at " + fmtH(t[0]);
+    else for (let i = 1; i <= 7; i++) { const nd = (d + i) % 7; if (HOURS[nd]) { msg = "opens " + (i === 1 ? "tomorrow" : DAYS[nd]) + " at " + fmtH(HOURS[nd][0]); break; } }
+    el.className = "status closed"; tx.textContent = "Closed · " + msg;
+  }
+  $("#hoursBody").innerHTML = [1, 2, 3, 4, 5, 6, 0].map(i => `<tr class="${i === d ? "today" : ""}"><td>${DAYS[i]}${i === d ? " · today" : ""}</td><td>${HOURS[i] ? fmtH(HOURS[i][0]) + " – " + fmtH(HOURS[i][1]) : "Closed"}</td></tr>`).join("");
+}
+
+/* Daily special */
+function weekRow(i, d) { const s = SPECIALS[i]; return `<li class="${i === d ? "today" : ""}"><span>${DAYS[i].slice(0, 3)} · ${s.n}</span><span>${s.p != null ? money(s.p) : ""}</span></li>`; }
+function specials() {
+  const d = new Date().getDay(), s = SPECIALS[d];
+  $("#specialDay").textContent = DAYS[d] + "'s special";
+  $("#specialName").textContent = s.n; $("#specialPrice").textContent = s.p != null ? money(s.p) : ""; $("#specialDesc").textContent = s.d;
+  $("#weekList").innerHTML = [1, 2, 3, 4, 5, 6, 0].map(i => weekRow(i, d)).join("");
+  $("#editName").value = s.n; $("#editPrice").value = s.p ?? ""; $("#editDesc").value = s.d;
+}
+["editName", "editPrice", "editDesc"].forEach(id => $("#" + id).addEventListener("input", () => {
+  const d = new Date().getDay(), p = parseFloat($("#editPrice").value);
+  SPECIALS[d] = { n: $("#editName").value || "Today's special", p: isNaN(p) ? null : p, d: $("#editDesc").value };
+  $("#specialName").textContent = SPECIALS[d].n; $("#specialPrice").textContent = SPECIALS[d].p != null ? money(SPECIALS[d].p) : ""; $("#specialDesc").textContent = SPECIALS[d].d;
+  $("#weekList").innerHTML = [1, 2, 3, 4, 5, 6, 0].map(i => weekRow(i, d)).join("");
+}));
+
+/* Menu */
+function tabs() {
+  $("#tabs").innerHTML = CATS.map(c => `<button class="tab" role="tab" type="button" aria-selected="${c === state.cat}" data-c="${c}">${c}</button>`).join("");
+  $("#tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => { state.cat = b.dataset.c; tabs(); menu(); });
+}
+function matches(m) {
+  const q = state.q.trim().toLowerCase();
+  const hay = (m.n + " " + m.d + " " + m.cat + (m.tags.includes("gf") ? " gluten-free gluten free" : "") + (m.tags.includes("veg") ? " vegetarian" : "")).toLowerCase();
+  return (state.cat === "All" || m.cat === state.cat) && (!q || hay.includes(q)) && [...state.f].every(f => f === "cheap" ? m.p < 12 : m.tags.includes(f));
+}
+function menu() {
+  const list = MENU.filter(matches), box = $("#menuList");
+  if (!list.length) { box.innerHTML = `<div class="empty">Nothing matches that yet. Clear a filter or try another dish.</div>`; return; }
+  const cats = CATS.slice(1).filter(c => list.some(m => m.cat === c));
+  box.innerHTML = cats.map(c => `<h3 class="cat-label">${c}</h3>` + list.filter(m => m.cat === c).map(m => {
+    const out = state.out.has(m.id);
+    return `<div class="dish${out ? " soldout" : ""}">
+      <div><h4>${m.n}${out ? '<span class="tag out">Sold out</span>' : ""}${m.tags.includes("fav") ? '<span class="tag fav-t">Favorite</span>' : ""}${m.tags.includes("veg") ? '<span class="tag veg">Veg</span>' : ""}${m.tags.includes("gf") ? '<span class="tag gf">GF</span>' : ""}</h4><p>${m.d}</p></div>
+      <span class="price">${money(m.p)}</span>
+      <button class="add" type="button" data-id="${m.id}" aria-label="Add ${m.n}" ${out ? "disabled" : ""}>+</button>
+      <label class="owner86"><input type="checkbox" data-out="${m.id}" ${out ? "checked" : ""}> Owner view: mark sold out today</label>
+    </div>`;
+  }).join("")).join("");
+  box.querySelectorAll(".add").forEach(b => b.onclick = () => addItem(b.dataset.id));
+  box.querySelectorAll("[data-out]").forEach(c => c.onchange = () => {
+    const id = c.dataset.out;
+    if (c.checked) { state.out.add(id); delete state.cart[id]; } else state.out.delete(id);
+    persist(); menu(); cart(); toast(c.checked ? "Marked sold out" : "Back on the menu");
+  });
+}
+function addItem(id) {
+  if (state.out.has(id)) { toast("Sold out today"); return; }
+  state.cart[id] = (state.cart[id] || 0) + 1; cart();
+  toast("Added " + MENU.find(m => m.id === id).n);
+}
+document.querySelectorAll("[data-add]").forEach(b => b.addEventListener("click", () => addItem(b.dataset.add)));
+$("#search").addEventListener("input", e => { state.q = e.target.value; menu(); });
+document.querySelectorAll(".chip[data-f]").forEach(b => b.onclick = () => {
+  const f = b.dataset.f; state.f.has(f) ? state.f.delete(f) : state.f.add(f);
+  b.setAttribute("aria-pressed", state.f.has(f)); menu();
+});
+
+/* Pickup list */
+function cart() {
+  const ids = Object.keys(state.cart).filter(id => state.cart[id] > 0 && MENU.find(m => m.id === id));
+  const n = ids.reduce((a, id) => a + state.cart[id], 0);
+  const sub = ids.reduce((a, id) => a + state.cart[id] * MENU.find(m => m.id === id).p, 0);
+  $("#cartList").innerHTML = ids.map(id => { const m = MENU.find(x => x.id === id); return `<li><span>${m.n}</span><span class="qty"><button type="button" data-d="${id}" aria-label="Remove one ${m.n}">−</button><span>${state.cart[id]}</span><button type="button" data-i="${id}" aria-label="Add one ${m.n}">+</button></span><span class="price">${money(m.p * state.cart[id])}</span></li>`; }).join("");
+  $("#cartEmpty").hidden = !!ids.length; $("#totals").hidden = !ids.length;
+  $("#callOrder").disabled = !ids.length; $("#onlineOrder").disabled = !ids.length;
+  if (!ids.length) $("#callbox").classList.remove("show");
+  $("#sub").textContent = money(sub); $("#tax").textContent = money(sub * .06); $("#total").textContent = money(sub * 1.06);
+  $("#cartCount").textContent = n + (n === 1 ? " item" : " items"); $("#mList").textContent = "List (" + n + ")";
+  $("#cartList").querySelectorAll("[data-d]").forEach(b => b.onclick = () => { state.cart[b.dataset.d]--; if (state.cart[b.dataset.d] <= 0) delete state.cart[b.dataset.d]; cart(); });
+  $("#cartList").querySelectorAll("[data-i]").forEach(b => b.onclick = () => { state.cart[b.dataset.i]++; cart(); });
+  persist();
+}
+$("#callOrder").onclick = () => $("#callbox").classList.add("show");
+$("#onlineOrder").onclick = () => toast("This button links to your online ordering page");
+
+/* Catering */
+function estimate() {
+  const g = +$("#guests").value, pp = +document.querySelector('input[name=pkg]:checked').value + ($("#dessert").checked ? 4 : 0), t = Math.ceil(g / 10);
+  $("#guestsOut").textContent = g; $("#estOut").textContent = "$" + (g * pp).toLocaleString();
+  $("#trays").textContent = t + " tray" + (t > 1 ? "s" : ""); $("#pp").textContent = "$" + pp + " per person";
+}
+$("#guests").addEventListener("input", estimate); $("#dessert").addEventListener("change", estimate);
+document.querySelectorAll("input[name=pkg]").forEach(r => r.addEventListener("change", estimate));
+
+/* Reservations */
+function times() {
+  const opts = []; for (let h = 11; h <= 20; h++) opts.push([h, "00"], [h, "30"]);
+  $("#rTime").innerHTML = opts.map(([h, m]) => { const t = (h % 12 || 12) + ":" + m + " " + (h >= 12 ? "PM" : "AM"); return `<option${t === "6:00 PM" ? " selected" : ""}>${t}</option>`; }).join("");
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const t = new Date(), tm = new Date(); tm.setDate(t.getDate() + 1);
+  $("#rDate").min = iso(t); $("#rDate").value = iso(tm);
+}
+$("#reserve").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = $("#rName").value.trim(), phone = $("#rPhone").value.replace(/\D/g, ""), date = $("#rDate").value;
+  let dErr = ""; if (!date) dErr = "Pick a date."; else if (!HOURS[new Date(date + "T12:00").getDay()]) dErr = "We're closed that day. Try another date.";
+  $("#eName").textContent = name ? "" : "Enter a name for the table.";
+  $("#ePhone").textContent = phone.length >= 10 ? "" : "Enter a 10-digit phone number.";
+  $("#eDate").textContent = dErr;
+  if (!name || phone.length < 10 || dErr) return;
+  const nice = new Date(date + "T12:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+  $("#rOk").textContent = `Thanks, ${name}. Table for ${$("#rSize").value} on ${nice} at ${$("#rTime").value} is requested. On a live site this goes straight to the restaurant. Nothing was sent from this sample.`;
+  $("#rOk").classList.add("show");
+});
+["rName", "rPhone", "rDate"].forEach(id => $("#" + id).addEventListener("input", () => { $("#e" + id.slice(1)).textContent = ""; }));
+
+/* Owner view */
+$("#ownerMode").addEventListener("change", e => {
+  document.body.classList.toggle("owner", e.target.checked);
+  toast(e.target.checked ? "Owner view on: edit the special or mark dishes sold out" : "Owner view off");
+  if (e.target.checked) $("#top").scrollIntoView();
+});
+
+status(); specials(); tabs(); menu(); cart(); estimate(); times();
+setInterval(status, 60000);
+</script>
+</body>
+</html>
