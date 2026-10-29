@@ -11,136 +11,142 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --oxblood: #5c0a0e;
-    --oxblood-deep: #420609;
-    --awning: #2f4636;
-    --cream: #f6f0e4;
-    --paper: #fbf8f1;
-    --gold: #b6955c;
-    --gold-pale: #e2cfa6;
-    --ink: #2a2421;
-    --muted: #6e645b;
+    --black: #0d0b0a;
+    --onyx: #15120f;
+    --onyx-2: #1c1814;
+    --oxblood: #4a080b;
+    --oxblood-deep: #2c0406;
+    --gold: #c9a96a;
+    --gold-pale: #e6d3a8;
+    --champagne: #efe4cc;
+    --text: #d9cfbe;
+    --muted: #9a8f80;
+    --line: rgba(201,169,106,.28);
     --display: "Bodoni Moda", "Didot", Georgia, serif;
     --body: "EB Garamond", Garamond, Georgia, serif;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; font: 400 19px/1.7 var(--body); color: var(--ink); background: var(--paper); }
+  body { margin: 0; font: 400 19px/1.75 var(--body); color: var(--text); background: var(--black); }
   a { color: inherit; }
   img { display: block; max-width: 100%; }
-  h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.12; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.12; color: var(--champagne); }
   p { margin: 0 0 18px; }
-  .sc { font-variant: small-caps; letter-spacing: 3px; text-transform: lowercase; font-size: 18px; }
+  .sc { font-variant: small-caps; letter-spacing: 4px; text-transform: lowercase; font-size: 18px; color: var(--gold); }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
   .narrow { max-width: 680px; margin: 0 auto; padding: 0 22px; }
-  .rule { display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--gold); margin: 22px 0; }
-  .rule::before, .rule::after { content: ""; flex: 0 1 90px; height: 1px; background: currentColor; }
-  .rule i { font-style: normal; font-size: 12px; }
+  .rule { display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--gold); margin: 24px 0; }
+  .rule::before, .rule::after { content: ""; flex: 0 1 90px; height: 1px; background: linear-gradient(90deg, transparent, currentColor); }
+  .rule::after { background: linear-gradient(90deg, currentColor, transparent); }
+  .rule i { font-style: normal; font-size: 11px; }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 1s ease, transform 1s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
-  .notice { background: #141110; color: #a79e93; font: 12px/1.5 Arial, sans-serif; text-align: center; padding: 6px 12px; }
+  .notice { background: #000; color: #8d857b; font: 12px/1.5 Arial, sans-serif; text-align: center; padding: 6px 12px; border-bottom: 1px solid #1d1a17; }
 
-  /* Masthead: like the sign over the door */
-  .masthead { background: var(--oxblood); color: var(--gold-pale); text-align: center; padding: 46px 22px 0; border-bottom: 4px double var(--gold); }
-  .masthead .est { color: var(--gold-pale); opacity: .85; }
-  .masthead .logo { display: inline-block; margin: 14px auto 8px; }
-  .masthead .logo img { width: min(387px, 82vw); height: auto; }
-  .masthead .town { font-family: var(--body); font-style: italic; font-size: 20px; color: #e9dcc4; margin: 0 0 30px; }
-  .masthead nav { border-top: 1px solid rgba(226,207,166,.3); }
-  .masthead nav ul { list-style: none; margin: 0 auto; padding: 14px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 0; max-width: 820px; }
+  /* Masthead: the sign over the door */
+  .masthead { background: radial-gradient(ellipse at 50% 0%, #241d16 0%, var(--black) 70%); text-align: center; padding: 64px 22px 0; border-bottom: 1px solid var(--line); }
+  .masthead .logo { display: inline-block; margin: 18px auto 10px; }
+  .masthead .logo img { width: min(420px, 84vw); height: auto; }
+  .masthead .town { font-style: italic; font-size: 20px; color: var(--muted); margin: 0 0 40px; }
+  .masthead nav { border-top: 1px solid var(--line); }
+  .masthead nav ul { list-style: none; margin: 0 auto; padding: 16px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 0; max-width: 820px; }
   .masthead nav li { display: flex; align-items: center; }
-  .masthead nav li + li::before { content: "◆"; font-size: 8px; color: var(--gold); margin: 0 18px; }
-  .masthead nav a { text-decoration: none; color: #f2e7d2; }
-  .masthead nav a:hover { color: #fff; text-decoration: underline; text-underline-offset: 5px; }
+  .masthead nav li + li::before { content: "◆"; font-size: 7px; color: var(--gold); margin: 0 20px; opacity: .7; }
+  .masthead nav a { text-decoration: none; color: var(--champagne); }
+  .masthead nav a:hover { color: var(--gold-pale); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
   @media (max-width: 560px) { .masthead nav li + li::before { margin: 0 10px; } .masthead nav .sc { font-size: 16px; letter-spacing: 2px; } }
 
-  /* The window: three arched windows */
-  .window { padding: 90px 0 96px; text-align: center; }
-  .window h1 { font-size: clamp(38px, 5.6vw, 66px); font-style: italic; color: var(--oxblood); }
-  .window .lede { font-size: 21px; color: #4c443e; max-width: 620px; margin: 0 auto; }
-  .arches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 58px; align-items: end; }
-  @media (max-width: 760px) { .arches { grid-template-columns: 1fr; gap: 44px; max-width: 320px; margin-left: auto; margin-right: auto; } }
+  /* The window: arched windows */
+  .window { padding: 110px 0 120px; text-align: center; }
+  .window h1 { font-size: clamp(40px, 6vw, 72px); font-style: italic; }
+  .window .lede { font-size: 21px; color: var(--text); max-width: 620px; margin: 0 auto; }
+  .arches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 38px; margin-top: 70px; align-items: end; }
+  @media (max-width: 760px) { .arches { grid-template-columns: 1fr; gap: 52px; max-width: 320px; margin-left: auto; margin-right: auto; } }
   .arch { margin: 0; }
-  .arch .pane { border: 1px solid var(--gold); border-radius: 999px 999px 0 0; padding: 10px; background: #fff; }
-  .arch .pane img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 999px 999px 0 0; }
+  .arch .pane { border: 1px solid var(--gold); border-radius: 999px 999px 0 0; padding: 10px; background: linear-gradient(#1a1612, #0f0d0b); box-shadow: 0 30px 60px rgba(0,0,0,.6); }
+  .arch .pane img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 999px 999px 0 0; filter: saturate(.9) contrast(1.05); }
   .arch:nth-child(2) .pane img { aspect-ratio: 3/4.6; }
-  .arch figcaption { margin-top: 16px; }
-  .arch figcaption b { display: block; font-family: var(--display); font-weight: 400; font-size: 24px; }
+  .arch figcaption { margin-top: 20px; }
+  .arch figcaption b { display: block; font-family: var(--display); font-weight: 400; font-size: 24px; color: var(--champagne); }
   .arch figcaption span { font-style: italic; color: var(--muted); font-size: 17px; }
 
   /* Story with the painting */
-  .story { background: var(--cream); padding: 96px 0; border-top: 1px solid #e7dcc6; border-bottom: 1px solid #e7dcc6; }
-  .story .painting { max-width: 330px; margin: 0 auto 44px; background: #fff; padding: 16px 16px 46px; box-shadow: 0 1px 0 #e5d9c2, 0 18px 40px rgba(60,30,10,.12); position: relative; }
-  .story .painting::after { content: "301 East Main Street"; position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-style: italic; color: var(--muted); font-size: 17px; }
-  .story h2 { text-align: center; font-size: clamp(32px, 4.2vw, 46px); }
-  .story p { font-size: 20px; color: #3f3833; }
-  .story p.first::first-letter { float: left; font-family: var(--display); font-size: 74px; line-height: .8; padding: 8px 10px 0 0; color: var(--oxblood); }
+  .story { background: var(--onyx); padding: 110px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .story .painting { max-width: 340px; margin: 0 auto 50px; padding: 14px; border: 1px solid var(--gold); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,.55); }
+  .story .painting::before { content: ""; position: absolute; inset: 5px; border: 1px solid var(--line); pointer-events: none; }
+  .story .painting figcaption { text-align: center; font-style: italic; color: var(--muted); font-size: 17px; margin-top: 14px; }
+  .story h2 { text-align: center; font-size: clamp(32px, 4.4vw, 48px); }
+  .story p { font-size: 20px; }
+  .story p.first::first-letter { float: left; font-family: var(--display); font-size: 78px; line-height: .8; padding: 8px 12px 0 0; color: var(--gold); }
 
-  /* Collection: engraved list on awning green */
-  .collection { background: var(--awning); color: #efe6d4; padding: 96px 0; }
+  /* Collection: engraved list */
+  .collection { background: var(--black); padding: 110px 0; }
   .collection .head { text-align: center; }
-  .collection h2 { font-size: clamp(34px, 4.6vw, 52px); color: #fff; }
-  .collection .head p { font-style: italic; color: #cfc4ae; margin: 10px 0 0; }
-  .list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 64px; margin-top: 54px; }
+  .collection h2 { font-size: clamp(34px, 4.8vw, 54px); }
+  .collection .head p { font-style: italic; color: var(--muted); margin: 10px 0 0; }
+  .list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 72px; margin-top: 60px; }
   @media (max-width: 760px) { .list { grid-template-columns: 1fr; } }
-  .item { padding: 22px 0; border-bottom: 1px solid rgba(226,207,166,.22); }
+  .item { padding: 24px 0; border-bottom: 1px solid var(--line); }
   .item .line { display: flex; align-items: baseline; gap: 12px; }
-  .item h3 { font-size: 26px; color: #fff; white-space: nowrap; }
-  .item .dots { flex: 1; border-bottom: 1px dotted rgba(226,207,166,.55); transform: translateY(-6px); }
-  .item .where { color: var(--gold-pale); white-space: nowrap; }
-  .item p { margin: 6px 0 0; font-style: italic; color: #d3c9b5; font-size: 18px; }
+  .item h3 { font-size: 26px; white-space: nowrap; }
+  .item .dots { flex: 1; border-bottom: 1px dotted rgba(201,169,106,.5); transform: translateY(-6px); }
+  .item .where { white-space: nowrap; }
+  .item p { margin: 6px 0 0; font-style: italic; color: var(--muted); font-size: 18px; }
   @media (max-width: 400px) { .item h3 { font-size: 22px; } .item .where { font-size: 15px; letter-spacing: 2px; } }
 
-  /* Bridal: oxblood, typographic */
-  .bridal { background: var(--oxblood); color: #efe3cd; padding: 100px 0; text-align: center; }
+  /* Bridal */
+  .bridal { background: radial-gradient(ellipse at 50% 20%, #5a0c10 0%, var(--oxblood) 35%, var(--oxblood-deep) 100%); padding: 120px 0; text-align: center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .bridal .sc { color: var(--gold-pale); }
-  .bridal h2 { font-size: clamp(40px, 6vw, 72px); font-style: italic; color: #fff; margin-top: 10px; }
-  .bridal .intro { font-size: 21px; color: #e2d4bc; max-width: 640px; margin: 24px auto 0; }
-  .vows { display: grid; grid-template-columns: repeat(3, 1fr); margin: 56px auto 0; max-width: 900px; border-top: 1px solid rgba(226,207,166,.3); border-bottom: 1px solid rgba(226,207,166,.3); }
+  .bridal h2 { font-size: clamp(42px, 6.4vw, 78px); font-style: italic; margin-top: 12px; }
+  .bridal .intro { font-size: 21px; color: #e2d2bb; max-width: 640px; margin: 26px auto 0; }
+  .vows { display: grid; grid-template-columns: repeat(3, 1fr); margin: 60px auto 0; max-width: 900px; border-top: 1px solid rgba(230,211,168,.3); border-bottom: 1px solid rgba(230,211,168,.3); }
   @media (max-width: 720px) { .vows { grid-template-columns: 1fr; } }
-  .vow { padding: 30px 24px; }
-  .vow + .vow { border-left: 1px solid rgba(226,207,166,.3); }
-  @media (max-width: 720px) { .vow + .vow { border-left: 0; border-top: 1px solid rgba(226,207,166,.3); } }
+  .vow { padding: 32px 24px; }
+  .vow + .vow { border-left: 1px solid rgba(230,211,168,.3); }
+  @media (max-width: 720px) { .vow + .vow { border-left: 0; border-top: 1px solid rgba(230,211,168,.3); } }
   .vow .n { font-family: var(--display); font-style: italic; font-size: 40px; color: var(--gold); line-height: 1; }
-  .vow h3 { font-size: 24px; color: #fff; margin: 10px 0 8px; }
-  .vow p { margin: 0; color: #dccfb6; font-size: 18px; }
-  form.appt { margin: 56px auto 0; max-width: 900px; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 14px; text-align: left; }
+  .vow h3 { font-size: 24px; margin: 10px 0 8px; }
+  .vow p { margin: 0; color: #dbcab0; font-size: 18px; }
+  form.appt { margin: 60px auto 0; max-width: 900px; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 14px; text-align: left; }
   @media (max-width: 820px) { form.appt { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 480px) { form.appt { grid-template-columns: 1fr; } }
-  form.appt .title { grid-column: 1 / -1; text-align: center; font-family: var(--display); font-size: 26px; color: #fff; margin-bottom: 6px; }
-  form.appt input, form.appt select { font: 400 18px var(--body); padding: 12px 14px; border: 1px solid rgba(226,207,166,.5); background: rgba(0,0,0,.18); color: #fff; border-radius: 0; min-width: 0; }
-  form.appt input::placeholder { color: #cbbda2; }
-  form.appt select option { color: var(--ink); }
-  form.appt button { font: 400 17px var(--body); font-variant: small-caps; letter-spacing: 3px; text-transform: lowercase; background: var(--gold-pale); color: var(--oxblood-deep); border: 0; padding: 12px 26px; cursor: pointer; }
-  form.appt button:hover { background: #fff; }
+  form.appt .title { grid-column: 1 / -1; text-align: center; font-family: var(--display); font-size: 26px; color: var(--champagne); margin-bottom: 6px; }
+  form.appt input, form.appt select { font: 400 18px var(--body); padding: 13px 14px; border: 1px solid rgba(230,211,168,.45); background: rgba(0,0,0,.3); color: #fff; border-radius: 0; min-width: 0; }
+  form.appt input::placeholder { color: #bfae92; }
+  form.appt select option { color: #222; }
+  form.appt button { font: 400 17px var(--body); font-variant: small-caps; letter-spacing: 4px; text-transform: lowercase; background: linear-gradient(135deg, #e6d3a8, #c9a96a); color: #2c0406; border: 0; padding: 13px 28px; cursor: pointer; }
+  form.appt button:hover { filter: brightness(1.08); }
   form.appt .done { grid-column: 1 / -1; display: none; text-align: center; font-style: italic; color: var(--gold-pale); }
-  .bridal .call { margin-top: 22px; color: #d9c9ab; }
+  .bridal .call { margin-top: 24px; color: #d6c4a6; }
   .bridal .call a { color: #fff; }
 
   /* Visit: a calling card */
-  .visit { padding: 96px 0 0; text-align: center; }
-  .card { max-width: 560px; margin: 0 auto; background: #fff; border: 1px solid #ddd0b6; padding: 12px; box-shadow: 0 16px 40px rgba(60,30,10,.1); }
-  .card-in { border: 1px solid var(--gold); padding: 46px 34px 40px; }
-  @media (max-width: 480px) { .card-in { padding: 36px 16px 32px; } }
-  .card h2 { font-size: clamp(30px, 6vw, 38px); color: var(--oxblood); }
+  .visit { padding: 110px 0 0; text-align: center; background: var(--black); }
+  .card { max-width: 560px; margin: 0 auto; background: var(--onyx-2); border: 1px solid var(--gold); padding: 10px; box-shadow: 0 30px 70px rgba(0,0,0,.7); }
+  .card-in { border: 1px solid var(--line); padding: 50px 34px 42px; }
+  @media (max-width: 480px) { .card-in { padding: 38px 16px 32px; } }
+  .card h2 { font-size: clamp(30px, 6vw, 38px); margin-top: 6px; }
   .card .addr { margin: 14px 0 2px; font-size: 21px; }
-  .card .phone { font-family: var(--display); font-size: 26px; text-decoration: none; color: var(--ink); }
-  .hours { margin: 24px auto 26px; border-collapse: collapse; font-size: 19px; }
+  .card .phone { font-family: var(--display); font-size: 26px; text-decoration: none; color: var(--gold-pale); }
+  .hours { margin: 26px auto 28px; border-collapse: collapse; font-size: 19px; }
   .hours td { padding: 4px 10px; }
   .hours td:first-child { text-align: right; font-style: italic; color: var(--muted); }
-  .hours td:last-child { text-align: left; }
-  .dir { display: inline-block; text-decoration: none; padding: 12px 28px; border: 1px solid var(--oxblood); color: var(--oxblood); }
-  .dir:hover { background: var(--oxblood); color: #fff; }
+  .hours td:last-child { text-align: left; color: var(--champagne); }
+  .dir { display: inline-block; text-decoration: none; padding: 12px 30px; border: 1px solid var(--gold); }
+  .dir:hover { background: var(--gold); color: var(--black); }
   .card small { display: block; margin-top: 18px; font-style: italic; color: var(--muted); font-size: 16px; }
   .map { margin-top: -60px; }
-  .map iframe { width: 100%; height: 380px; border: 0; display: block; filter: sepia(.35) saturate(.75); }
+  .map iframe { width: 100%; height: 380px; border: 0; display: block; filter: grayscale(1) invert(.92) sepia(.25) contrast(.9); }
 
-  footer { background: var(--oxblood-deep); color: #cdbfa6; text-align: center; padding: 50px 22px 22px; border-top: 4px double var(--gold); }
-  footer .name { font-family: var(--display); font-size: 28px; color: #f3e8d3; }
-  footer p { margin: 6px 0 0; font-style: italic; }
-  footer .links { margin: 20px 0 0; }
-  footer .links a { margin: 0 12px; text-decoration: none; }
-  footer .links a:hover { color: #fff; }
-  footer .bottom { max-width: 1080px; margin: 32px auto 0; padding-top: 14px; border-top: 1px solid rgba(226,207,166,.2); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; }
+  footer { background: #000; color: var(--muted); text-align: center; padding: 56px 22px 22px; border-top: 1px solid var(--line); }
+  footer img { width: 240px; margin: 0 auto; }
+  footer p { margin: 10px 0 0; font-style: italic; }
+  footer .links { margin: 22px 0 0; }
+  footer .links a { margin: 0 12px; text-decoration: none; color: var(--champagne); }
+  footer .links a:hover { color: var(--gold); }
+  footer .bottom { max-width: 1080px; margin: 34px auto 0; padding-top: 14px; border-top: 1px solid #221e1a; font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; }
 </style>
 </head>
 <body>
@@ -148,8 +154,8 @@
 <div class="notice">Concept website designed by David Gayle for Joseph James Jewelers. Not the official site.</div>
 
 <header class="masthead" id="top">
-  <div class="sc est">fine jewelry on east main street</div>
-  <a class="logo" href="#top"><img src="img/logo-cream.png" alt="Joseph James Jewelers"></a>
+  <div class="sc">fine jewelry on east main street</div>
+  <a class="logo" href="#top"><img src="img/logo-gold.png" alt="Joseph James Jewelers"></a>
   <p class="town">Mechanicsburg, Pennsylvania</p>
   <nav aria-label="Main">
     <ul>
@@ -168,15 +174,15 @@
     <div class="rule"><i>◆</i></div>
     <p class="lede">For more than thirty years, Mechanicsburg has come to the corner of East Main Street for engagement rings, wedding bands, and the gifts that mark life's best days.</p>
     <div class="arches">
-      <figure class="arch">
+      <figure class="arch reveal">
         <div class="pane"><img src="img/bracelets.jpg" alt="A tray of sterling, gold and gemstone bracelets"></div>
         <figcaption><b>Bracelets</b><span>Sterling, gold &amp; gemstone</span></figcaption>
       </figure>
-      <figure class="arch">
+      <figure class="arch reveal">
         <div class="pane"><img src="img/engagement.jpg" alt="A newly engaged woman hugging her partner, her engagement ring visible on her hand"></div>
         <figcaption><b>Engagement</b><span>The ring for the question</span></figcaption>
       </figure>
-      <figure class="arch">
+      <figure class="arch reveal">
         <div class="pane"><img src="img/ring-box.jpg" alt="An engagement ring and matching wedding band in a navy velvet ring box"></div>
         <figcaption><b>Wedding Bands</b><span>Made to sit side by side</span></figcaption>
       </figure>
@@ -186,7 +192,7 @@
 
 <section class="story">
   <div class="narrow">
-    <div class="painting"><img src="img/storefront-painting.jpg" alt="Watercolor painting of the Joseph James Jewelers storefront, a brick corner building with striped awnings and a bench out front"></div>
+    <figure class="painting reveal" style="margin:0 auto 50px"><img src="img/storefront-painting.jpg" alt="Watercolor painting of the Joseph James Jewelers storefront, a brick corner building with striped awnings and a bench out front"><figcaption>301 East Main Street</figcaption></figure>
     <h2>A jeweler you know by name</h2>
     <div class="rule"><i>◆</i></div>
     <p class="first">You'll know us by the striped awnings on the corner of East Main Street. We've been part of downtown Mechanicsburg for more than thirty years, and we still do things the hometown way: no pressure, no rush, and honest answers to every question.</p>
@@ -197,11 +203,11 @@
 <section class="collection" id="collection">
   <div class="wrap">
     <div class="head">
-      <div class="sc" style="color:var(--gold-pale)">in the cases</div>
+      <div class="sc">in the cases</div>
       <h2>The Collection</h2>
       <p>Best seen in person. Here's what you'll find when you stop in.</p>
     </div>
-    <div class="list">
+    <div class="list reveal">
       <div class="item"><div class="line"><h3>Engagement Rings</h3><span class="dots"></span><span class="where sc">in store</span></div><p>Solitaires, halos and vintage-inspired settings.</p></div>
       <div class="item"><div class="line"><h3>Wedding Bands</h3><span class="dots"></span><span class="where sc">in store</span></div><p>For both partners, including diamond and stackable bands.</p></div>
       <div class="item"><div class="line"><h3>Bracelets</h3><span class="dots"></span><span class="where sc">in store</span></div><p>Sterling, gold and gemstone, everyday to statement.</p></div>
@@ -217,7 +223,7 @@
     <div class="sc">bridal</div>
     <h2>Before you ask the question.</h2>
     <p class="intro">Picking a ring is a big decision. Here's how it works when you shop with a hometown jeweler.</p>
-    <div class="vows">
+    <div class="vows reveal">
       <div class="vow"><div class="n">i.</div><h3>Come in &amp; look</h3><p>See settings and stones side by side, with no one rushing you.</p></div>
       <div class="vow"><div class="n">ii.</div><h3>Ask anything</h3><p>Budget, size, style, care. Get straight answers before you decide.</p></div>
       <div class="vow"><div class="n">iii.</div><h3>We're still here</h3><p>For the wedding bands, the sizing, and every anniversary after.</p></div>
@@ -236,9 +242,9 @@
 
 <section class="visit" id="visit">
   <div class="wrap" style="position:relative;z-index:2">
-    <div class="card">
+    <div class="card reveal">
       <div class="card-in">
-        <div class="sc" style="color:var(--gold)">visit us</div>
+        <div class="sc">visit us</div>
         <h2>Joseph James Jewelers</h2>
         <p class="addr">301 E Main St, Mechanicsburg, PA 17055</p>
         <a class="phone" href="tel:7177959224">(717) 795-9224</a>
@@ -258,7 +264,7 @@
 </section>
 
 <footer>
-  <div class="name">Joseph James Jewelers</div>
+  <img src="img/logo-gold.png" alt="Joseph James Jewelers">
   <p>Fine jewelry on East Main Street, Mechanicsburg</p>
   <div class="links">
     <a href="tel:7177959224">(717) 795-9224</a>
@@ -271,6 +277,10 @@
 </footer>
 
 <script>
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .15 }) : null;
+  document.querySelectorAll('.reveal').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
   document.getElementById('appt').addEventListener('submit', function (e) {
     e.preventDefault();
     document.getElementById('done').style.display = 'block';
