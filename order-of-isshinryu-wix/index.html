@@ -632,7 +632,7 @@
           <p>Spring semester: <strong>December 1</strong><br>Fall semester: <strong>August 1</strong></p>
           <h4>Funded by</h4>
           <p>The OIMA Scholarship Fund, through donations and our annual fundraising events.</p>
-          <a class="btn" href="https://oimartialarts.com/memorial-scholarship-info/" target="_blank" rel="noopener">Application &amp; writing help</a>
+          <a class="btn" href="#contact">Ask about applying</a>
         </div>
       </div>
       <div class="panel" id="s2" role="tabpanel" aria-labelledby="t2">
@@ -648,7 +648,7 @@
         <div class="side">
           <h4>How to apply</h4>
           <p>1. Complete the application<br>2. Add a cover page saying what you're applying for<br>3. Write an essay (writing prompts help)<br>4. Get two letters of recommendation<br>5. Give it all to your sensei</p>
-          <a class="btn" href="https://oimartialarts.com/oima-scholarship/" target="_blank" rel="noopener">Application &amp; writing help</a>
+          <a class="btn" href="#contact">Ask about applying</a>
         </div>
       </div>
       <div class="donate">
@@ -656,7 +656,7 @@
           <h3>Help a student get to college</h3>
           <p>The GM Toby Cooling Scholarship is funded by donations. The Order of Isshin-Ryu is a registered 501(c)(3) nonprofit (EIN 81-1056220), and donations are tax deductible under section 170(f)(8) of the Internal Revenue Code.</p>
         </div>
-        <a class="btn" href="https://oimartialarts.com/donations/" target="_blank" rel="noopener">Donate</a>
+        <a class="btn" href="#contact">Ask how to give</a>
       </div>
     </div>
   </div>
@@ -706,7 +706,7 @@
     <div class="head">
       <span class="hand">Written by our own sensei</span>
       <h2 class="title">Books by Dan Popp</h2>
-      <p>Tap a book to read about it. Looking for T-shirts, totes and hats? Visit the <a href="https://oimartialarts.com/store/" target="_blank" rel="noopener">OI Martial Arts Store</a>.</p>
+      <p>Tap a book to read about it.</p>
     </div>
     <div class="shelf" id="shelf"></div>
     <div class="book-info" id="book-info" aria-live="polite"></div>
@@ -967,9 +967,9 @@ function IMG(name) { return IMAGES[name + '.jpg'] || ''; }
 
   // Dojos
   var dojos = [
-    ['Tres Artes Dojo', 'Harrisburg, PA', 'PA', 'dojo-tres-artes', 'Weapons training in the Harrisburg dojo.', 'https://oimartialarts.com/harrisburg-dojo/'],
+    ['Tres Artes Dojo', 'Harrisburg, PA', 'PA', 'dojo-tres-artes', 'Weapons training in the Harrisburg dojo.', '#contact'],
     ['Jayco Dojo', 'Elkton, MD', 'MD', 'dojo-jayco', 'Grandmaster Cooling\'s home area in Cecil County.'],
-    ['Elkton YMCA Dojo', 'Elkton, MD', 'MD', 'dojo-elkton-ymca', 'Classes for kids and adults at the YMCA.', 'https://oimartialarts.com/elkton-ymca-dojo/'],
+    ['Elkton YMCA Dojo', 'Elkton, MD', 'MD', 'dojo-elkton-ymca', 'Classes for kids and adults at the YMCA.', '#contact'],
     ['Atlanta Dojo', 'Atlanta, GA', 'GA', 'dojo-atlanta', 'The Order in the Southeast.'],
     ['Isham Martial Arts Academy', 'Huntington Beach, NY', 'NY', 'dojo-isham', 'A full class of young students and their black belts.'],
     ['OIMA Virtual Dojo', 'Online with Sensei Ginn', 'online', 'dojo-virtual', 'Train with the Order from anywhere.']
@@ -978,7 +978,7 @@ function IMG(name) { return IMAGES[name + '.jpg'] || ''; }
   dl.innerHTML = dojos.map(function (d) {
     return '<article class="dojo' + (d[2] === 'PA' ? ' local' : '') + '" data-st="' + d[2] + '"><img src="' + IMG(d[3]) + '" alt="' + d[0] + '" loading="lazy"><div>' +
       '<h3>' + d[0] + '</h3><div class="loc">' + d[1] + '</div><p class="small" style="margin:8px 0 0">' + d[4] + '</p>' +
-      (d[5] ? '<a class="go" href="' + d[5] + '" target="_blank" rel="noopener">Contact this dojo</a>' : '') + '</div></article>';
+      (d[5] ? '<a class="go" href="' + d[5] + '"' + (d[5][0] === '#' ? '' : ' target="_blank" rel="noopener"') + '>Contact this dojo</a>' : '') + '</div></article>';
   }).join('');
   chips('d-filters', function (f) {
     dl.querySelectorAll('.dojo').forEach(function (el) { el.classList.toggle('hide', f !== 'all' && el.dataset.st !== f); });
