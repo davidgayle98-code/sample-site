@@ -60,7 +60,7 @@
   nav a:hover { color: var(--gold); }
   @media (max-width: 480px) { .logo img { width: 46px; height: 46px; } .logo span { font-size: 17px; letter-spacing: 1px; } .logo small { font-size: 10.5px; letter-spacing: 1.5px; } }
   .burger { display: none; background: none; color: #fff; border: 1px solid #555; border-radius: 3px; padding: 8px 12px; font: inherit; font-weight: 700; cursor: pointer; }
-  @media (max-width: 1020px) {
+  @media (max-width: 1200px) {
     .burger { display: block; }
     nav { position: absolute; top: 80px; left: 0; right: 0; background: var(--charcoal); display: none; border-bottom: 3px solid var(--red); }
     nav.open { display: block; }
@@ -294,6 +294,10 @@
   .book img { width: 100%; box-shadow: 4px 6px 14px rgba(0,0,0,.25); }
   .book:hover, .book[aria-pressed="true"] { transform: translateY(-10px); }
   .book-info { margin-top: 34px; background: #fff; padding: 28px; border: 1px solid var(--line); min-height: 160px; }
+  .buy { display: flex; align-items: center; gap: 16px; margin-top: 18px; flex-wrap: wrap; }
+  .buy .price { font-family: var(--slab); font-weight: 700; font-size: 26px; }
+  .cartbar { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--ink); color: #fff; padding: 12px 18px; }
+  .cartbar[hidden] { display: none; }
   .book-info h3 { font-size: 28px; margin-bottom: 4px; }
   .book-info .by { font-family: var(--hand); color: var(--red); font-size: 19px; margin-bottom: 10px; }
 
@@ -706,10 +710,13 @@
     <div class="head">
       <span class="hand">Written by our own sensei</span>
       <h2 class="title">Books by Dan Popp</h2>
-      <p>Tap a book to read about it.</p>
+      <p>Tap a book to read about it, then add it to your cart.</p>
     </div>
     <div class="shelf" id="shelf"></div>
     <div class="book-info" id="book-info" aria-live="polite"></div>
+    <div class="cartbar" id="cartbar" hidden><span>Your cart: <b id="cart-count">0</b></span><button class="btn" type="button" id="checkout">Checkout</button></div>
+    <p class="wix-err" id="shop-err" hidden></p>
+    <p class="wix-note" style="text-align:center">Concept site: book prices are samples. Checkout is handled by Wix.</p>
   </div>
 </section>
 
@@ -857,6 +864,54 @@ function IMG(name) { return IMAGES[name + '.jpg'] || ''; }
     btn.disabled = true; btn.textContent = 'One moment…'; errEl.hidden = true;
     redirect({ bookingsCheckout: { timezone: WIX.timeZone, slotAvailability: { slot: slot, bookable: true } } }, '#book')
       .catch(function (err) { btn.disabled = false; btn.textContent = 'Book'; errEl.hidden = false; errEl.textContent = err.message; });
+  });
+
+  // --- book store (Wix Stores + eCom cart)
+  var STORES_APP = '215238eb-22a5-4c36-9e7b-e7c08025e04e';
+  var BOOK_IDS = ['4ea15ff2-0460-4fb9-9126-6187445ac57d', '58158d9d-a1e6-457d-801f-7062322d0810', '90245609-8518-4fb6-95d5-ce6ca94bf84b', '297823f3-b01c-4655-99bd-63b634f8db94', 'd66826a2-90cd-409f-a966-b4247c239f66'];
+  var prices = {};
+  var shopErr = document.getElementById('shop-err');
+  function showErr(msg) { shopErr.hidden = false; shopErr.textContent = msg; }
+  window.fillBookPrices = function () {
+    document.querySelectorAll('[data-price]').forEach(function (el) { el.textContent = prices[BOOK_IDS[+el.dataset.price]] || ''; });
+  };
+  post('/stores/v3/products/query', { query: { filter: { id: { $in: BOOK_IDS } }, cursorPaging: { limit: 10 } } })
+    .then(function (r) {
+      (r.products || []).forEach(function (p) {
+        var v = p.actualPriceRange && p.actualPriceRange.minValue;
+        prices[p.id] = (v && (v.formattedAmount || (v.amount && '$' + v.amount))) || '';
+      });
+      window.fillBookPrices();
+    }).catch(function () {});
+  function setCount(cart) {
+    var n = ((cart && cart.lineItems) || []).reduce(function (s, l) { return s + (l.quantity || 0); }, 0);
+    document.getElementById('cart-count').textContent = n + (n === 1 ? ' book' : ' books');
+    document.getElementById('cartbar').hidden = n === 0;
+  }
+  token().then(function (tk) {
+    return fetch(WIX.api + '/ecom/v2/carts/current', { headers: { Authorization: tk } });
+  }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { setCount(j && j.cart); }).catch(function () {});
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-add]');
+    if (!btn) return;
+    var id = BOOK_IDS[+btn.dataset.add];
+    btn.disabled = true; btn.textContent = 'Adding…'; shopErr.hidden = true;
+    post('/ecom/v2/carts/current/add-line-items', { catalogItems: [{ quantity: 1, catalogReference: { catalogItemId: id, appId: STORES_APP } }] })
+      .then(function (r) {
+        var added = ((r.cart && r.cart.lineItems) || []).some(function (l) { return l.catalogReference && l.catalogReference.catalogItemId === id; });
+        if (!added) throw new Error("That book couldn't be added right now.");
+        setCount(r.cart); btn.textContent = 'Added ✓';
+        setTimeout(function () { btn.disabled = false; btn.textContent = 'Add to cart'; }, 1500);
+      })
+      .catch(function (err) { btn.disabled = false; btn.textContent = 'Add to cart'; showErr(err.message); });
+  });
+  document.getElementById('checkout').addEventListener('click', function () {
+    var btn = this;
+    btn.disabled = true; btn.textContent = 'One moment…'; shopErr.hidden = true;
+    token().then(function (tk) { return fetch(WIX.api + '/ecom/v2/carts/current', { headers: { Authorization: tk } }); })
+      .then(function (r) { if (!r.ok) throw new Error('Your cart is empty.'); return r.json(); })
+      .then(function (j) { return redirect({ ecomCheckout: { checkoutId: j.cart.id } }, '#books'); })
+      .catch(function (err) { btn.disabled = false; btn.textContent = 'Checkout'; showErr(err.message); });
   });
 
   // --- membership dues
@@ -1046,7 +1101,9 @@ function IMG(name) { return IMAGES[name + '.jpg'] || ''; }
   }).join('');
   function showBook(i) {
     shelf.querySelectorAll('.book').forEach(function (b) { b.setAttribute('aria-pressed', +b.dataset.i === i); });
-    info.innerHTML = '<h3>' + books[i][1] + '</h3><div class="by">by Dan Popp</div><p style="margin:0">' + books[i][2] + '</p>';
+    info.innerHTML = '<h3>' + books[i][1] + '</h3><div class="by">by Dan Popp</div><p style="margin:0">' + books[i][2] + '</p>' +
+      '<div class="buy"><span class="price" data-price="' + i + '"></span><button class="btn" type="button" data-add="' + i + '">Add to cart</button></div>';
+    if (window.fillBookPrices) window.fillBookPrices();
   }
   shelf.addEventListener('click', function (e) { var b = e.target.closest('.book'); if (b) showBook(+b.dataset.i); });
   showBook(0);
